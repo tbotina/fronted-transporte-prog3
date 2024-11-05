@@ -1,6 +1,6 @@
 Instalar Angular
 ````
-npm i @angular/cli@14.2.12 --force
+npm i -g @angular/cli@14.2.12 --force
 ````
 Clonar el repositorio
 ````

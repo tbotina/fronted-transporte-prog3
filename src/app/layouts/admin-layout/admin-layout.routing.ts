@@ -11,5 +11,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent }
+    { path: 'maps',           component: MapsComponent },
+    {
+        path: 'productos',
+        loadChildren: () => import('src/app/pages/producto/producto.module').then(m => m.ProductoModule)
+    }
 ];

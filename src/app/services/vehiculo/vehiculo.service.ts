@@ -21,14 +21,14 @@ export class VehiculoService {
       `${environment.url_ms_negocio}/vehiculos/${id}`
     );
   }
-  create(newServicio: Vehiculo): Observable<Vehiculo> {
+  create(nuevoVehiculo: Vehiculo): Observable<Vehiculo> {
     return this.http.post<Vehiculo>(
-      `${environment.url_ms_negocio}/vehiculos`,newServicio
+      `${environment.url_ms_negocio}/vehiculos`,nuevoVehiculo
     );
   }
-  update(theServicio: Vehiculo): Observable<Vehiculo> {
+  update(elVehiculo: Vehiculo): Observable<Vehiculo> {
     return this.http.put<Vehiculo>(
-      `${environment.url_ms_negocio}/vehiculos/${theServicio.id}`,theServicio
+      `${environment.url_ms_negocio}/vehiculos/${elVehiculo.id}`,elVehiculo
     );
   }
   delete(id: number) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
-import { Servicios } from 'src/app/models/servicios.module';
+import { Servicios } from 'src/app/models/servicios.model';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import Swal from 'sweetalert2';
 
@@ -45,7 +45,7 @@ export class ListComponent implements OnInit {
             title: 'Eliminado!',
             text: 'El servicio ha sido eliminado correctamente.',
             icon: 'success',
-            confirmButtonColor: '#232323', 
+            confirmButtonColor: '#232323',  
             background: '#1c1c1c', 
             color: '#ffffff' 
           });

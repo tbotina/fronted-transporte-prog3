@@ -20,6 +20,13 @@ export const AuthLayoutRoutes: Routes = [
     },
     {path:"servicios",
     loadChildren: () => import('src/app/pages/servicios/servicios.module').then(m => m.ServiciosModule)
-    }
+    },
+    {path:"direccion",
+        loadChildren: () => import('src/app/pages/direccion/direccion.module').then(m => m.DireccionModule)
+        },
+        {path:"dirlistarorden",
+            loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
+            }
+    
 
 ];

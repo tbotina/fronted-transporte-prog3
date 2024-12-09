@@ -5,7 +5,7 @@
   <!-- Button for creating new department -->
   <div class="row mb-3">
     <div class="col">
-      <button class="btn btn-create">
+      <button class="btn btn-create" (click)="createVehiculo()">
         <i class="fas fa-hand-paper"></i> Crear
       </button>
     </div>
@@ -33,7 +33,7 @@
                 <td>{{actual.id}}</td>
                 <td>{{actual.placa}}</td>
                 <td>{{actual.municipio_id}}</td>
-                <td>{{actual.Tipo_vehiculo}}</td>
+                <td>{{actual.tipo_vehiculo}}</td>
                 <td>
                   <button class="btn btn-view btn-sm" (click)="viewVehiculo(actual.id)">
                     <i class="fas fa-eye"></i>
@@ -42,7 +42,7 @@
                     <i class="fas fa-trash-alt"></i>
                   </button>
                   <button class="btn btn-warning btn-sm" (click)="updateVehiculo(actual.id)">
-                    <i class="fas fa-user-edit"></i>                 
+                    <i class="fas fa-edit"></i>                 
                   </button>
                 </td>
               </tr>

@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  vehiculos: Vehiculo[]; // Array de vehiculos
+  vehiculos: Vehiculo[]; // Array de vehiculo
   
   constructor(private service: VehiculoService,
               private router:Router) { 
@@ -22,7 +22,7 @@ export class ListComponent implements OnInit {
   }
 
   list(){
-    // Llamada al servicio para obtener la lista de vehiculos
+    // Llamada al vehiculo para obtener la lista de vehiculo
     this.service.list().subscribe((data) => {
       this.vehiculos = data;
       }
@@ -31,8 +31,8 @@ export class ListComponent implements OnInit {
 
   deleteVehiculo(id: number): void {
     Swal.fire({
-      title: 'Eliminar servicio',
-      text: '¿Está seguro que quiere eliminar este servicio?',
+      title: 'Eliminar vehiculo',
+      text: '¿Está seguro que quiere eliminar este vehiculo?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#232323', 
@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
         this.service.delete(id).subscribe(data => {
           Swal.fire({
             title: 'Eliminado!',
-            text: 'El servicio ha sido eliminado correctamente.',
+            text: 'El vehiculo ha sido eliminado correctamente.',
             icon: 'success',
             confirmButtonColor: '#232323', 
             background: '#1c1c1c', 
@@ -56,22 +56,22 @@ export class ListComponent implements OnInit {
         });
       }
     });
-    console.log('Eliminar servicio con id:', id);
+    console.log('Eliminar vehiculo con id:', id);
   }
 
   viewVehiculo(id:number){
-    this.router.navigate(["servicios/view/"+id])
+    this.router.navigate(["vehiculos/view/"+id])
     console.log('Visualizar a ', id)
   }
 
   updateVehiculo(id: number): void {
-    this.router.navigate(["servicios/update/"+id])
-    console.log('Actualizar servicio con id:', id);
+    this.router.navigate(["vehiculos/update/"+id])
+    console.log('Actualizar vehiculo con id:', id);
   }
 
   createVehiculo(): void {
-    this.router.navigate(["servicios/create"])
-    console.log('Crear un nuevo servicio');
+    this.router.navigate(["vehiculos/create"])
+    console.log('Crear un nuevo vehiculo');
   }
 
 }

@@ -7,13 +7,13 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'tables',         component: TablesComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    {
-        path: 'productos',
-        loadChildren: () => import('src/app/pages/producto/producto.module').then(m => m.ProductoModule)
-    }
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'user-profile', component: UserProfileComponent },
+    { path: 'tables', component: TablesComponent },
+    { path: 'icons', component: IconsComponent },
+    { path: 'maps', component: MapsComponent },
+    { path: 'productos', loadChildren: () => import('src/app/pages/producto/producto-routing.module').then(m => m.ProductoRoutingModule) },
+    { path: 'lotes', loadChildren: () => import('src/app/pages/lote/lote-routing.module').then(m => m.LoteRoutingModule) },
+    { path: 'dir-lista-ordenes', loadChildren: () => import('src/app/pages/dir-lista-orden/dir-lista-orden.module').then(m => m.DirListaOrdenModule) },
+    { path: 'rutas', loadChildren: () => import('src/app/pages/ruta/ruta.module').then(m => m.RutaModule) },
 ];

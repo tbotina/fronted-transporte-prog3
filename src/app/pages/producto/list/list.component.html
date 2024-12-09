@@ -1,1 +1,39 @@
-<p>list works!</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Productos</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col-2">Id</th>
+                                <th scope="col-5">Nombre</th>
+                                <th scope="col-5">Opciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <tbody>
+                        <tr *ngFor="let producto of productos">
+                            <td>{{producto.id}}</td>
+                            <td>{{producto.nombre}}</td>
+                            <td>
+                                <!-- <a class="btn btn-primary" [routerLink]="['/theaters/edit', theater.id]">Editar</a> -->
+                                <button class="btn btn-danger" (click)="delete(producto.id)">Eliminar</button>
+                                <button class="btn btn-danger" (click)="update(producto.id)">Actualizar</button>
+                                <button class="btn btn-danger" (click)="view(producto.id)">Ver</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

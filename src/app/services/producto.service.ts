@@ -14,4 +14,8 @@ export class ProductoService {
   list(): Observable <Producto[]>{
     return this.http.get<Producto[]>(`${environment.url_ms_negocio}/productos`);
   }
+  
+  delete(id: number) {
+    return this.http.delete<Producto>(`${environment.url_ms_negocio}/productos/${id}`);
+  }
 }

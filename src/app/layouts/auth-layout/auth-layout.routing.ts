@@ -5,6 +5,7 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
+import { LoginComponent } from 'src/app/pages/login/login.component';
 
 export const AuthLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -12,6 +13,8 @@ export const AuthLayoutRoutes: Routes = [
     { path: 'tables', component: TablesComponent },
     { path: 'icons', component: IconsComponent },
     { path: 'maps', component: MapsComponent },
+    { path: 'login',          component: LoginComponent },
+
     {
         path: "administrador", loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
     },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
-import { Departamentos } from 'src/app/models/departamentos';
+import { Departamentos } from 'src/app/models/departamentos.module';
 import { DepartamentosService } from 'src/app/services/departamentos.service';
 import Swal from 'sweetalert2';
 

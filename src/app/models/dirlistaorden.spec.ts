@@ -1,4 +1,4 @@
-import { Dirlistaorden } from './dirlistaorden';
+import { Dirlistaorden } from './dirlistaorden.module';
 
 describe('Dirlistaorden', () => {
   it('should create an instance', () => {

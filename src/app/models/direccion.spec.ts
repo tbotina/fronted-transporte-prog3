@@ -1,4 +1,4 @@
-import { Direccion } from './direccion';
+import { Direccion } from './direccion.module';
 
 describe('Direccion', () => {
   it('should create an instance', () => {

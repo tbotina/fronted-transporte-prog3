@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Vehiculo } from 'src/app/models/vehiculo.model';
+import { VehiculoService } from 'src/app/services/vehiculo/vehiculo.service';
 import { Route, Router } from '@angular/router';
-import { Servicios } from 'src/app/models/servicios.module';
-import { ServiciosService } from 'src/app/services/servicios.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,23 +10,26 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  servicios: Servicios[];
-
-  constructor(private service: ServiciosService, private router:Router) { 
-    this.servicios = [];
+  vehiculos: Vehiculo[]; // Array de vehiculos
+  
+  constructor(private service: VehiculoService,
+              private router:Router) { 
+    this.vehiculos = [];
   }
 
   ngOnInit(): void {
     this.list();
   }
 
-  list() {
-    this.service.list().subscribe(data => {
-      this.servicios = data;
-      console.log(JSON.stringify(this.servicios));
-    });
+  list(){
+    // Llamada al servicio para obtener la lista de vehiculos
+    this.service.list().subscribe((data) => {
+      this.vehiculos = data;
+      }
+    );
   }
-  deleteServicio(id: number): void {
+
+  deleteVehiculo(id: number): void {
     Swal.fire({
       title: 'Eliminar servicio',
       text: '¿Está seguro que quiere eliminar este servicio?',
@@ -56,18 +59,19 @@ export class ListComponent implements OnInit {
     console.log('Eliminar servicio con id:', id);
   }
 
-  viewServicio(id:number){
+  viewVehiculo(id:number){
     this.router.navigate(["servicios/view/"+id])
     console.log('Visualizar a ', id)
   }
 
-  updateServicio(id: number): void {
+  updateVehiculo(id: number): void {
     this.router.navigate(["servicios/update/"+id])
     console.log('Actualizar servicio con id:', id);
   }
 
-  createServicio(): void {
+  createVehiculo(): void {
     this.router.navigate(["servicios/create"])
     console.log('Crear un nuevo servicio');
   }
+
 }

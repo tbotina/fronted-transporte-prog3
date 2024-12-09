@@ -1,4 +1,4 @@
-import { Departamentos } from './departamentos';
+import { Departamentos } from './departamentos.module';
 
 describe('Departamentos', () => {
   it('should create an instance', () => {

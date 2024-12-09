@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Administrador } from '../models/administrador';
+import { Administrador } from '../models/administrador.model';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';

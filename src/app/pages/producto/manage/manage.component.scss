@@ -1,0 +1,113 @@
+// Variables de colores para un tema fúnebre
+$background-color: #1a1a1a; // Fondo oscuro
+$card-background-color: #2e2e2e; // Fondo de la tarjeta ligeramente más claro
+$text-color: #e0e0e0; // Texto claro
+$header-color: #111111; // Encabezado muy oscuro
+$table-header-color: #333333; // Encabezado de tabla oscuro
+$table-row-color: #3e3e3e; // Fila de tabla
+$table-row-hover-color: #555555; // Fila de tabla al pasar el cursor
+
+// Degradados para los botones
+$create-gradient: linear-gradient(to right, red, orange);
+$view-gradient: linear-gradient(to right, blue, lightblue);
+$delete-gradient: linear-gradient(to right, crimson, lightcoral);
+$update-gradient: linear-gradient(to right, goldenrod, lightgoldenrodyellow);
+
+// Aplicar estilos
+.header {
+  background-color: $header-color;
+}
+
+.container-fluid {
+  background-color: $background-color;
+}
+
+.card {
+  background-color: $card-background-color;
+  color: $text-color;
+
+  .card-header {
+    background-color: $header-color;
+    border-bottom: 1px solid $table-header-color;
+  }
+
+  .card-body {
+    background-color: $card-background-color;
+  }
+}
+
+.table {
+  color: $text-color;
+
+  thead {
+    background-color: $table-header-color;
+  }
+
+  tbody {
+    tr {
+      background-color: $table-row-color;
+
+      &:hover {
+        background-color: $table-row-hover-color;
+      }
+    }
+  }
+}
+
+.table th,
+.table td {
+  border: 1px solid $table-header-color;
+}
+
+// Estilos para los botones
+.btn-create {
+  background: $create-gradient;
+  border: none;
+  color: white;
+}
+
+.btn-create:hover {
+  background: linear-gradient(to right, darkred, darkorange);
+}
+
+.btn-view {
+  background: $view-gradient;
+  border: none;
+  color: white;
+}
+
+.btn-view:hover {
+  background: linear-gradient(to right, darkblue, deepskyblue);
+}
+
+.btn-delete {
+  background: $delete-gradient;
+  border: none;
+  color: rgb(193, 32, 32);
+}
+
+.btn-delete:hover {
+  background: linear-gradient(to right, firebrick, indianred);
+}
+
+.btn-update {
+  background: $update-gradient;
+  border: none;
+  color: white;
+}
+
+.btn-update:hover {
+  background: linear-gradient(to right, goldenrod, khaki);
+}
+
+// Estilo para input
+.form-control {
+  background-color: $table-row-color;
+  color: $text-color;
+  border: 1px solid $table-header-color;
+}
+
+.form-control:disabled {
+  background-color: $table-header-color;
+  color: $text-color;
+}

@@ -17,15 +17,15 @@ export class DepartamentosService {
   }
   
   view(id:number): Observable<Departamentos>{
-    return this.http.get< Departamentos >(`${environment.url_ms_funeraria_p3}/departamentos/${id}`) ;
+    return this.http.get< Departamentos >(`${environment.url_ms_negocio}/departamentos/${id}`) ;
    }
    create(newDepartamento: Departamentos):Observable<Departamentos>{
-    return this.http.post<Departamentos>(`${environment.url_ms_funeraria_p3}/departamentos` ,newDepartamento);
+    return this.http.post<Departamentos>(`${environment.url_ms_negocio}/departamentos` ,newDepartamento);
    }
    update(TheDepartamento: Departamentos):Observable<Departamentos>{
-    return this.http.put<Departamentos>(`${environment.url_ms_funeraria_p3}/departamentos/${TheDepartamento.id}`,TheDepartamento );
+    return this.http.put<Departamentos>(`${environment.url_ms_negocio}/departamentos/${TheDepartamento.id}`,TheDepartamento );
    }
   delete(id:number){
-    return this.http.delete<Departamentos>(`${environment.url_ms_funeraria_p3}/departamentos/${id}` );
+    return this.http.delete<Departamentos>(`${environment.url_ms_negocio}/departamentos/${id}` );
   }
 }

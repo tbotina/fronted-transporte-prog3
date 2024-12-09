@@ -12,11 +12,6 @@ export const AuthLayoutRoutes: Routes = [
     { path: 'tables', component: TablesComponent },
     { path: 'icons', component: IconsComponent },
     { path: 'maps', component: MapsComponent },
-    { path: "departamentos", loadChildren: () => import('src/app/pages/departamentos/departamentos.module').then(m => m.DepartamentosModule) },
-    { path: 'productos', loadChildren: () => import('src/app/pages/producto/producto.module').then(m => m.ProductoModule) },
-    { path: 'lotes', loadChildren: () => import('src/app/pages/lote/lote.module').then(m => m.LoteModule) },
-    { path: 'dir-lista-ordenes', loadChildren: () => import('src/app/pages/dir-lista-orden/dir-lista-orden.module').then(m => m.DirListaOrdenModule) },
-    { path: 'rutas', loadChildren: () => import('src/app/pages/ruta/ruta.module').then(m => m.RutaModule) },
     {
         path: "administrador", loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
     },
@@ -33,6 +28,7 @@ export const AuthLayoutRoutes: Routes = [
     },
     {
         path: "dirlistarorden", loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
-    }
+    },
+    
 
 ];

@@ -12,12 +12,12 @@ export class ProductoService {
   constructor(private http:HttpClient) { }
 
   list(): Observable<Producto[]> {
-    return this.http.get<{ data: Producto[] }>(`${environment.url_ms_negocio}/productos`).pipe(map(response => response.data));
+    return this.http
+      .get<{ data: Producto[] }>(
+        `${environment.url_ms_negocio}/productos`
+      )
+      .pipe(map((response) => response.data));
   }
-
-  // list(): Observable <Producto[]>{
-  //   return this.http.get<Producto[]>(`${environment.url_ms_negocio}/productos`);
-  // }
 
   view(id: number): Observable<Producto> {
     return this.http.get<Producto>(`${environment.url_ms_negocio}/productos/${id}`);

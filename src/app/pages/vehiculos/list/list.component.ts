@@ -1,77 +1,91 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Vehiculo } from 'src/app/models/vehiculo.model';
 import { VehiculoService } from 'src/app/services/vehiculo/vehiculo.service';
-import { Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: 'app-manage',
+  templateUrl: './manage.component.html',
+  styleUrls: ['./manage.component.scss']
 })
-export class ListComponent implements OnInit {
-  vehiculos: Vehiculo[]; // Array de vehiculo
-  
-  constructor(private service: VehiculoService,
-              private router:Router) { 
-    this.vehiculos = [];
+export class ManageComponent implements OnInit {
+
+  mode: number;
+  vehiculo: Vehiculo;
+  theFormGroup: FormGroup;
+  trySend: boolean;
+
+  constructor(private activateRoute: ActivatedRoute, private service: VehiculoService, private router: Router, private theFormBuilder: FormBuilder) {
+    this.trySend = false;
+    this.mode = 1;
+    this.vehiculo = { id: 0, placa: "", municipio_id: 0, tipo_vehiculo: "" };
   }
 
   ngOnInit(): void {
-    this.list();
+    this.configFormGroup();
+    const currentUrl = this.activateRoute.snapshot.url.join('/');
+    if (currentUrl.includes('view')) {
+      this.mode = 1;
+    }
+    if (currentUrl.includes('create')) {
+      this.mode = 2;
+    }
+    if (currentUrl.includes('update')) {
+      this.mode = 3;
+    }
+    if (this.activateRoute.snapshot.params.id) {
+      this.vehiculo.id = this.activateRoute.snapshot.params.id;
+      this.getVehiculo(this.vehiculo.id);
+    }
   }
 
-  list(){
-    // Llamada al vehiculo para obtener la lista de vehiculo
-    this.service.list().subscribe((data) => {
-      this.vehiculos = data;
-      }
-    );
-  }
-
-  deleteVehiculo(id: number): void {
-    Swal.fire({
-      title: 'Eliminar vehiculo',
-      text: '¿Está seguro que quiere eliminar este vehiculo?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#232323', 
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar',
-      background: '#1c1c1c', 
-      color: '#ffffff' 
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.service.delete(id).subscribe(data => {
-          Swal.fire({
-            title: 'Eliminado!',
-            text: 'El vehiculo ha sido eliminado correctamente.',
-            icon: 'success',
-            confirmButtonColor: '#232323', 
-            background: '#1c1c1c', 
-            color: '#ffffff' 
-          });
-          this.ngOnInit();
-        });
-      }
+  configFormGroup() {
+    this.theFormGroup = this.theFormBuilder.group({
+      placa: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(6)]],
+      municipio_id:[0, [ Validators.required]],
+      tipo_vehiculo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]]
     });
-    console.log('Eliminar vehiculo con id:', id);
   }
 
-  viewVehiculo(id:number){
-    this.router.navigate(["vehiculos/view/"+id])
-    console.log('Visualizar a ', id)
+  get getTheFormGroup() {
+    return this.theFormGroup.controls;
   }
 
-  updateVehiculo(id: number): void {
-    this.router.navigate(["vehiculos/update/"+id])
-    console.log('Actualizar vehiculo con id:', id);
+  getVehiculo(id: number) {
+    this.service.view(id).subscribe(data => {
+      this.vehiculo = data;
+      console.log(JSON.stringify(this.vehiculo));
+      this.theFormGroup.patchValue(this.vehiculo); // Update form with the fetched data
+    });
   }
 
-  createVehiculo(): void {
-    this.router.navigate(["vehiculos/create"])
-    console.log('Crear un nuevo vehiculo');
+  create() {
+    if (this.theFormGroup.invalid) {
+      this.trySend = true;
+      Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
+      return;
+    }
+    this.service.create(this.vehiculo).subscribe(data => {
+      Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
+      this.router.navigate(["vehiculos/list"]);
+    });
+  }
+  
+  volverVehiculo(): void {
+    this.router.navigate(["vehiculos/list"])
   }
 
+  update() {
+    if (this.theFormGroup.invalid) {
+      this.trySend = true;
+      Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
+      return;
+    }
+    this.service.update(this.vehiculo).subscribe(data => {
+      Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success");
+      this.router.navigate(["vehiculos/list"]);
+    });
+  }
 }

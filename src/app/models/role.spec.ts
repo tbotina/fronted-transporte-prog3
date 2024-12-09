@@ -1,4 +1,4 @@
-import { Role } from './role';
+import { Role } from './role.module';
 
 describe('Role', () => {
   it('should create an instance', () => {

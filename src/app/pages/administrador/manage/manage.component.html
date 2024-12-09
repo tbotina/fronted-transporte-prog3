@@ -1,0 +1,98 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 *ngIf="mode === 1">visualizar</h3>
+          <h3 *ngIf="mode === 2">crear</h3>
+          <h3 *ngIf="mode === 3">actualizar</h3>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-4">
+                Id:
+              </div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="administrador._id" disabled>
+              </div>
+            </div>
+
+            
+            <form [formGroup]="theFormGroup">
+
+            <div class="row">
+              <div class="col-4">
+                name:
+              </div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="administrador.name"
+                 [disabled]="mode==1" formControlName="name">
+
+                 <br>
+                 <div
+                 *ngIf="getTheFormGroup.name.errors &&(getTheFormGroup.name.dirty|| getTheFormGroup.name.touched)">
+                <strong *ngIf="getTheFormGroup.name.errors.required" class="msnError">Requerido</strong>
+                <strong *ngIf="getTheFormGroup.name.errors.minlength||getTheFormGroup.name.errors.maxlength" class="msnError">invalido</strong>
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                  email:
+                </div>
+                <div class="col-8">
+                  <input type="text" class="form-control" [(ngModel)]="administrador.email"
+                   [disabled]="mode==1" formControlName="email">
+  
+                   <br>
+                   <div
+                   *ngIf="getTheFormGroup.email.errors &&(getTheFormGroup.email.dirty|| getTheFormGroup.email.touched)">
+                  <strong *ngIf="getTheFormGroup.email.errors.required" class="msnError">Requerido</strong>
+                  <strong *ngIf="getTheFormGroup.email.errors.minlength||getTheFormGroup.email.errors.maxlength" class="msnError">invalido</strong>
+  
+  
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4">
+                  password:
+                </div>
+                <div class="col-8">
+                  <input type="text" class="form-control" [(ngModel)]="administrador.password"
+                   [disabled]="mode==1" formControlName="password">
+  
+                   <br>
+                   <div
+                   *ngIf="getTheFormGroup.password.errors &&(getTheFormGroup.password.dirty|| getTheFormGroup.password.touched)">
+                  <strong *ngIf="getTheFormGroup.password.errors.required" class="msnError">Requerido</strong>
+                  <strong *ngIf="getTheFormGroup.password.errors.minlength||getTheFormGroup.password.errors.maxlength" class="msnError">invalido</strong>
+  
+  
+                  </div>
+                </div>
+              </div>
+          </form>
+
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-8">
+                <button *ngIf="mode==2" (click)="create()" type="button" class="btn btn-create btn-block">crear</button>
+                <button *ngIf="mode==3" (click)="update()" type="button" class="btn btn-update btn-block">actualizar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

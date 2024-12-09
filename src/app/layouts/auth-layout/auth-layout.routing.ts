@@ -17,4 +17,22 @@ export const AuthLayoutRoutes: Routes = [
     { path: 'lotes', loadChildren: () => import('src/app/pages/lote/lote.module').then(m => m.LoteModule) },
     { path: 'dir-lista-ordenes', loadChildren: () => import('src/app/pages/dir-lista-orden/dir-lista-orden.module').then(m => m.DirListaOrdenModule) },
     { path: 'rutas', loadChildren: () => import('src/app/pages/ruta/ruta.module').then(m => m.RutaModule) },
+    {
+        path: "administrador", loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
+    },
+    {
+        path: "departamentos",
+        loadChildren: () => import('src/app/pages/departamentos/departamentos.module').then(m => m.DepartamentosModule)
+    },
+    {
+        path: "servicios",
+        loadChildren: () => import('src/app/pages/servicios/servicios.module').then(m => m.ServiciosModule)
+    },
+    {
+        path: "direccion", loadChildren: () => import('src/app/pages/direccion/direccion.module').then(m => m.DireccionModule)
+    },
+    {
+        path: "dirlistarorden", loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
+    }
+
 ];

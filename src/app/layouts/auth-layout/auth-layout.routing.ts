@@ -12,8 +12,14 @@ export const AuthLayoutRoutes: Routes = [
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
+    {path:"administrador",
+    loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
+    },
     {path:"departamentos",
     loadChildren: () => import('src/app/pages/departamentos/departamentos.module').then(m => m.DepartamentosModule)
+    },
+    {path:"servicios",
+    loadChildren: () => import('src/app/pages/servicios/servicios.module').then(m => m.ServiciosModule)
     }
 
 ];

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'console';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/user.module';
 import { SecurityService } from 'src/app/services/security.service';
 import Swal from 'sweetalert2';
 

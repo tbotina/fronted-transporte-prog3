@@ -7,26 +7,28 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 
 export const AuthLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',component: UserProfileComponent },
-    { path: 'tables',         component: TablesComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    {path:"administrador",
-    loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'user-profile', component: UserProfileComponent },
+    { path: 'tables', component: TablesComponent },
+    { path: 'icons', component: IconsComponent },
+    { path: 'maps', component: MapsComponent },
+    {
+        path: "administrador", loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
     },
-    {path:"departamentos",
-    loadChildren: () => import('src/app/pages/departamentos/departamentos.module').then(m => m.DepartamentosModule)
+    {
+        path: "departamentos",
+        loadChildren: () => import('src/app/pages/departamentos/departamentos.module').then(m => m.DepartamentosModule)
     },
-    {path:"servicios",
-    loadChildren: () => import('src/app/pages/servicios/servicios.module').then(m => m.ServiciosModule)
+    {
+        path: "servicios",
+        loadChildren: () => import('src/app/pages/servicios/servicios.module').then(m => m.ServiciosModule)
     },
-    {path:"direccion",
-        loadChildren: () => import('src/app/pages/direccion/direccion.module').then(m => m.DireccionModule)
-        },
-        {path:"dirlistarorden",
-            loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
-            }
+    {
+        path: "direccion", loadChildren: () => import('src/app/pages/direccion/direccion.module').then(m => m.DireccionModule)
+    },
+    {
+        path: "dirlistarorden", loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
+    },
     
 
 ];

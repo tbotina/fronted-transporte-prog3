@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/user.module';
 import { SecurityService } from 'src/app/services/security.service';
 
 declare interface RouteInfo {

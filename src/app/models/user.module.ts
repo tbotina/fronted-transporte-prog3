@@ -1,4 +1,4 @@
-import { Role } from "./role";
+import { Role } from "./role.module";
 
 export class User {
     _id?:string;

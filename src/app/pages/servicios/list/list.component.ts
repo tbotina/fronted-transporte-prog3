@@ -45,7 +45,7 @@ export class ListComponent implements OnInit {
             title: 'Eliminado!',
             text: 'El servicio ha sido eliminado correctamente.',
             icon: 'success',
-            confirmButtonColor: '#232323', 
+            confirmButtonColor: '#232323',  
             background: '#1c1c1c', 
             color: '#ffffff' 
           });

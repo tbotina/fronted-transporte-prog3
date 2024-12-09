@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Servicios } from "../models/servicios";
+import { Servicios } from "../models/servicios.model";
 import { environment } from "src/environments/environment";
 import { map, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";

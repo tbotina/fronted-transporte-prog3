@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { map, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { Direccion } from "../models/direccion";
+import { Direccion } from "../models/direccion.module";
 
 @Injectable({
   providedIn: "root",

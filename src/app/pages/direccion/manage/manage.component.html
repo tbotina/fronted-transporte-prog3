@@ -1,0 +1,80 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-volver" (click)="volverDireccion()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="card shadow">
+                <div class="card-header bg-transparent">
+                    <h3 *ngIf="mode === 1">visualizar</h3>
+                    <h3 *ngIf="mode === 2">crear</h3>
+                    <h3 *ngIf="mode === 3">actualizar</h3>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                Id:
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" [(ngModel)]="direccion.id" disabled>
+                            </div>
+                        </div>
+                        <form [formGroup]="theFormGroup">
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Municipio Id:
+                                </div>
+                                <div class="col-8">
+                                    <input type="number" class="form-control" [(ngModel)]="direccion.municipio_id"
+                                        [disabled]="mode==1" formControlName="municipio_id">
+
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.municipio_id.errors && (getTheFormGroup.municipio_id.dirty || getTheFormGroup.municipio_id.touched)">
+                                        <strong *ngIf="getTheFormGroup.municipio_id.errors.required" class="msnError">Requerido</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Direccion:
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="direccion.direcion"
+                                        [disabled]="mode==1" formControlName="direcion">
+
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.direcion.errors && (getTheFormGroup.direcion.dirty || getTheFormGroup.direcion.touched)">
+                                        <strong *ngIf="getTheFormGroup.direcion.errors.required" class="msnError">Requerido</strong>
+                                        <strong
+                                            *ngIf="getTheFormGroup.direcion.errors.minlength || getTheFormGroup.direcion.errors.maxlength"
+                                            class="msnError">Invalido</strong>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-8">
+                                <button *ngIf="mode==2" (click)="create()" type="button"
+                                    class="btn btn-create btn-block">crear</button>
+                                <button *ngIf="mode==3" (click)="update()" type="button"
+                                    class="btn btn-update btn-block">actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

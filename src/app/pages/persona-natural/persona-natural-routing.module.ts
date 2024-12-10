@@ -4,7 +4,7 @@ import { ListComponent } from './list/list.component';
 import { ManageComponent } from './manage/manage.component';
 
 const routes: Routes = [
-  {path:"list",
+{path:"list",
   component:ListComponent
 },
 {path:"create",
@@ -27,4 +27,7 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DireccionRoutingModule { }
+
+
+
+export class PersonaNaturalRoutingModule { }

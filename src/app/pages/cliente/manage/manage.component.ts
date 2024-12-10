@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Servicios } from 'src/app/models/servicios.model';
-import { ServiciosService } from 'src/app/services/servicios.service';
+import { Vehiculo } from 'src/app/models/vehiculo.model';
+import { VehiculoService } from 'src/app/services/vehiculo/vehiculo.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,15 +11,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./manage.component.scss']
 })
 export class ManageComponent implements OnInit {
+
   mode: number;
-  servicio: Servicios;
+  vehiculo: Vehiculo;
   theFormGroup: FormGroup;
   trySend: boolean;
 
-  constructor(private activateRoute: ActivatedRoute, private service: ServiciosService, private router: Router, private theFormBuilder: FormBuilder) {
+  constructor(private activateRoute: ActivatedRoute, private service: VehiculoService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;
     this.mode = 1;
-    this.servicio = { id: 0, descripcion: "", estado_servicio: true };
+    this.vehiculo = { id: 0, placa: "", municipio_id: 0, tipo_vehiculo: "" };
   }
 
   ngOnInit(): void {
@@ -35,15 +36,16 @@ export class ManageComponent implements OnInit {
       this.mode = 3;
     }
     if (this.activateRoute.snapshot.params.id) {
-      this.servicio.id = this.activateRoute.snapshot.params.id;
-      this.getServicio(this.servicio.id);
+      this.vehiculo.id = this.activateRoute.snapshot.params.id;
+      this.getVehiculo(this.vehiculo.id);
     }
   }
 
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
-      descripcion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1500)]],
-      estado_servicio:[true, [ Validators.required]]
+      placa: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(6)]],
+      municipio_id:[true, [ Validators.required]],
+      tipo_vehiculo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]]
     });
   }
 
@@ -51,11 +53,11 @@ export class ManageComponent implements OnInit {
     return this.theFormGroup.controls;
   }
 
-  getServicio(id: number) {
+  getVehiculo(id: number) {
     this.service.view(id).subscribe(data => {
-      this.servicio = data;
-      console.log(JSON.stringify(this.servicio));
-      this.theFormGroup.patchValue(this.servicio); // Update form with the fetched data
+      this.vehiculo = data;
+      console.log(JSON.stringify(this.vehiculo));
+      this.theFormGroup.patchValue(this.vehiculo); // Update form with the fetched data
     });
   }
 
@@ -65,13 +67,14 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.create(this.servicio).subscribe(data => {
+    this.service.create(this.vehiculo).subscribe(data => {
       Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
-      this.router.navigate(["servicios/list"]);
+      this.router.navigate(["vehiculo/list"]);
     });
   }
-  volverServicio(): void {
-    this.router.navigate(["servicios/list"])
+  
+  volverVehiculo(): void {
+    this.router.navigate(["vehiculos/list"])
   }
 
   update() {
@@ -80,9 +83,9 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.update(this.servicio).subscribe(data => {
+    this.service.update(this.vehiculo).subscribe(data => {
       Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success");
-      this.router.navigate(["servicios/list"]);
+      this.router.navigate(["vehiculo/list"]);
     });
   }
 }

@@ -32,6 +32,8 @@ export const AuthLayoutRoutes: Routes = [
     {
         path: "dirlistarorden", loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
     },
-    
+    {
+        path: "personanatural", loadChildren: () => import('src/app/pages/persona-natural/persona-natural.module').then(m => m.PersonaNaturalModule)
+    },
 
 ];

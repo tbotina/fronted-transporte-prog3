@@ -7,33 +7,33 @@ import { Direccion } from "../models/direccion.module";
 @Injectable({
   providedIn: "root",
 })
-export class direccionService {
+export class DireccionService {
   constructor(private http: HttpClient) {}
   list(): Observable<Direccion[]> {
     return this.http
       .get<{ data: Direccion[] }>(
-        `${environment.url_ms_negocio}/direcciones`
+        `${environment.url_ms_negocio}/direccion`
       )
       .pipe(map((response) => response.data));
   }
   view(id: number): Observable<Direccion> {
     return this.http.get<Direccion>(
-      `${environment.url_ms_negocio}/direcciones/${id}`
+      `${environment.url_ms_negocio}/direccion/${id}`
     );
   }
   create(newServicio: Direccion): Observable<Direccion> {
     return this.http.post<Direccion>(
-      `${environment.url_ms_negocio}/direcciones`,newServicio
+      `${environment.url_ms_negocio}/direccion`,newServicio
     );
   }
   update(theServicio: Direccion): Observable<Direccion> {
     return this.http.put<Direccion>(
-      `${environment.url_ms_negocio}/direcciones/${theServicio.id}`,theServicio
+      `${environment.url_ms_negocio}/direccion/${theServicio.id}`,theServicio
     );
   }
   delete(id: number) {
     return this.http.delete<Direccion>(
-      `${environment.url_ms_negocio}/direcciones/${id}`
+      `${environment.url_ms_negocio}/direccion/${id}`
     );
   }
 }

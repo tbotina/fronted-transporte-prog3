@@ -1,5 +1,6 @@
 export class Direccion {
-    id:number
-    municipio_id:undefined
+    id?:number
+    municipioId?:number
+centrosDistribucionId?: number;
     direcion: string
 }

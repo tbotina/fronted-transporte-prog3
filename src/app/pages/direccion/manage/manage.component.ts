@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Servicios } from 'src/app/models/servicios.model';
-import { ServiciosService } from 'src/app/services/servicios.service';
+import { Direccion } from 'src/app/models/direccion.module';
+import { DireccionService } from 'src/app/services/direccion.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,15 +11,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./manage.component.scss']
 })
 export class ManageComponent implements OnInit {
+
   mode: number;
-  servicio: Servicios;
+  direccion: Direccion;
   theFormGroup: FormGroup;
   trySend: boolean;
 
-  constructor(private activateRoute: ActivatedRoute, private service: ServiciosService, private router: Router, private theFormBuilder: FormBuilder) {
+  constructor(private activateRoute: ActivatedRoute, private service: DireccionService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;
     this.mode = 1;
-    this.servicio = { id: 0, descripcion: "", estado_servicio: true };
+    this.direccion = { id: 0, municipio_id: 0, direcion: "" };
   }
 
   ngOnInit(): void {
@@ -35,15 +36,15 @@ export class ManageComponent implements OnInit {
       this.mode = 3;
     }
     if (this.activateRoute.snapshot.params.id) {
-      this.servicio.id = this.activateRoute.snapshot.params.id;
-      this.getServicio(this.servicio.id);
+      this.direccion.id = Number(this.activateRoute.snapshot.params.id);
+      this.getDireccion(this.direccion.id);
     }
   }
 
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
-      descripcion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1500)]],
-      estado_servicio:[true, [ Validators.required]]
+      municipio_id: [0, [Validators.required]],
+      direcion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1500)]]
     });
   }
 
@@ -51,11 +52,11 @@ export class ManageComponent implements OnInit {
     return this.theFormGroup.controls;
   }
 
-  getServicio(id: number) {
+  getDireccion(id: number) {
     this.service.view(id).subscribe(data => {
-      this.servicio = data;
-      console.log(JSON.stringify(this.servicio));
-      this.theFormGroup.patchValue(this.servicio); // Update form with the fetched data
+      this.direccion = data;
+      console.log(JSON.stringify(this.direccion));
+      this.theFormGroup.patchValue(this.direccion); // Update form with the fetched data
     });
   }
 
@@ -65,13 +66,14 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.create(this.servicio).subscribe(data => {
+    this.service.create(this.direccion).subscribe(data => {
       Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
-      this.router.navigate(["servicios/list"]);
+      this.router.navigate(["direccion/list"]);
     });
   }
-  volverServicio(): void {
-    this.router.navigate(["servicios/list"])
+  
+  volverDireccion(): void {
+    this.router.navigate(["direccion/list"])
   }
 
   update() {
@@ -80,9 +82,9 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.update(this.servicio).subscribe(data => {
+    this.service.update(this.direccion).subscribe(data => {
       Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success");
-      this.router.navigate(["servicios/list"]);
+      this.router.navigate(["direccion/list"]);
     });
   }
 }

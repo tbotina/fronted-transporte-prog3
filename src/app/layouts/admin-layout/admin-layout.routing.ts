@@ -34,7 +34,7 @@ export const AdminLayoutRoutes: Routes = [
         ]
     },
     {
-        path: 'dir-lista-ordenes',
+        path: 'dirlistaordenes',
         children: [
             {
                 path: '',
@@ -54,5 +54,9 @@ export const AdminLayoutRoutes: Routes = [
     {
         path: 'vehiculos',
         loadChildren: () => import('src/app/pages/vehiculos/vehiculos.module').then(m => m.VehiculosModule)
+    },
+    {
+        path: 'duenos',
+        loadChildren: () => import('src/app/pages/duenos/dueños.module').then(m => m.DuenosModule)
     }
 ];

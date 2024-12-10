@@ -1,0 +1,142 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-volver" (click)="volverDueno()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="card shadow">
+                <div class="card-header bg-transparent">
+                    <h3 *ngIf="mode === 1">visualizar</h3>
+                    <h3 *ngIf="mode === 2">crear</h3>
+                    <h3 *ngIf="mode === 3">actualizar</h3>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+
+                        <div class="row mb-2">
+                            <div class="col-4">
+                                Id:
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" [(ngModel)]="dueno.id" disabled>
+                            </div>
+                        </div>
+                        <form [formGroup]="theFormGroup">
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Nombre:
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="dueno.nombre"
+                                        [disabled]="mode==1" formControlName="nombre">
+
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.nombre.errors &&(getTheFormGroup.nombre.dirty || getTheFormGroup.nombre.touched)">
+                                        <strong *ngIf="getTheFormGroup.nombre.errors.required"
+                                            class="msnError">Requerido</strong>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row">
+                                <div class="col-4">
+                                    Email:
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="dueno.email"
+                                        [disabled]="mode==1" formControlName="email">
+
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.email.errors &&(getTheFormGroup.email.dirty|| getTheFormGroup.email.touched)">
+                                        <strong *ngIf="getTheFormGroup.email.errors.required"
+                                            class="msnError">Requerido</strong>
+                                        <strong
+                                            *ngIf="getTheFormGroup.email.errors.minlength||getTheFormGroup.email.errors.maxlength"
+                                            class="msnError">invalido</strong>
+
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Nacimiento:
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="dueno.fecha_nacimiento"
+                                        [disabled]="mode==1" formControlName="fecha_nacimiento">
+
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.fecha_nacimiento.errors && (getTheFormGroup.fecha_nacimiento.dirty || getTheFormGroup.fecha_nacimiento.touched)">
+                                        <strong *ngIf="getTheFormGroup.fecha_nacimiento.errors.required"
+                                            class="msnError">Requerido</strong>
+                                        <strong
+                                            *ngIf="getTheFormGroup.fecha_nacimiento.errors.minlength || getTheFormGroup.fecha_nacimiento.errors.maxlength"
+                                            class="msnError">invalido</strong>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Cedula:
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="dueno.cedula"
+                                        [disabled]="mode==1" formControlName="cedula">
+
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.cedula.errors &&(getTheFormGroup.cedula.dirty || getTheFormGroup.cedula.touched)">
+                                        <strong *ngIf="getTheFormGroup.cedula.errors.required"
+                                            class="msnError">Requerido</strong>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Security_id:
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="dueno.security_id"
+                                        [disabled]="mode==1" formControlName="security_id">
+
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.security_id.errors &&(getTheFormGroup.security_id.dirty || getTheFormGroup.security_id.touched)">
+                                        <strong *ngIf="getTheFormGroup.security_id.errors.required"
+                                            class="msnError">Requerido</strong>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-8">
+                                <button *ngIf="mode==2" (click)="create()" type="button"
+                                    class="btn btn-create btn-block">crear</button>
+                                <button *ngIf="mode==3" (click)="update()" type="button"
+                                    class="btn btn-update btn-block">actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

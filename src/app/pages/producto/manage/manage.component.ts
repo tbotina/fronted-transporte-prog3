@@ -92,6 +92,6 @@ export class ManageComponent implements OnInit {
   }
 
   volverProducto(): void {
-    this.router.navigate(["vehiculos/list"])
+    this.router.navigate(["productos/list"])
   }
 }

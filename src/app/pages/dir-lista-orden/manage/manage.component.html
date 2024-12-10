@@ -1,1 +1,78 @@
-<p>manage works!</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <button class="btn btn-volver" (click)="volverDirlistaorden()">
+    <i class="fas fa-arrow-left"></i></button>
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 *ngIf="mode === 1">Visualizar</h3>
+          <h3 *ngIf="mode === 2">Crear</h3>
+          <h3 *ngIf="mode === 3">Actualizar</h3>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-4">Id:</div>
+              <div class="col-8"><input type="text" class="form-control" [(ngModel)]="dirlistaorden.id" disabled> </div>
+            </div>
+            <form [formGroup]="theFormGroup">
+                <div class="row">
+                    <div class="col-4">Orden</div>
+                    <div class="col-8">
+                      <input type="text" class="form-control" [(ngModel)]="dirlistaorden.orden" [disabled]="mode==1"
+                        formControlName="ruta_id">
+                      <br>
+                      <div
+                        *ngIf="getTheFormGroup.ordenerrors &&(getTheFormGroup.orden.dirty|| getTheFormGroup.orden.touched)">
+                        <strong *ngIf="getTheFormGroup.orden.errors.required" class="msnError">Requerido</strong>
+                        <strong *ngIf="getTheFormGroup.orden.errors.minlength||getTheFormGroup.orden.errors.maxlength"
+                          class="msnError">invalido</strong>
+                      </div>
+                    </div>
+                  </div>
+              <br>
+              <div class="row">
+                <div class="col-4">ID Ruta</div>
+                <div class="col-8">
+                  <input type="text" class="form-control" [(ngModel)]="dirlistaorden.ruta_id" [disabled]="mode==1"
+                    formControlName="ruta_id">
+                  <br>
+                  <div
+                    *ngIf="getTheFormGroup.ruta_id.errors &&(getTheFormGroup.ruta_id.dirty|| getTheFormGroup.ruta_id.touched)">
+                    <strong *ngIf="getTheFormGroup.ruta_id.errors.required" class="msnError">Requerido</strong>
+                    <strong *ngIf="getTheFormGroup.ruta_id.errors.minlength||getTheFormGroup.ruta_id.errors.maxlength"
+                      class="msnError">invalido</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">ID Dirección</div>
+                <div class="col-8">
+                  <input type="text" class="form-control" [(ngModel)]="dirlistaorden.direccion_id" [disabled]="mode==1" formControlName="contrato_id">
+                  <br>
+                  <div
+                    *ngIf="getTheFormGroup.contrato_id.errors &&(getTheFormGroup.contrato_id.dirty|| getTheFormGroup.contrato_id.touched)">
+                    <strong *ngIf="getTheFormGroup.contrato_id.errors.required" class="msnError">Requerido</strong>
+                    <strong *ngIf="getTheFormGroup.contrato_id.errors.minlength||getTheFormGroup.contrato_id.errors.maxlength"
+                      class="msnError">invalido</strong>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-8">
+                <button *ngIf="mode==2" (click)="create()" type="button" class="btn btn-create btn-block">Crear</button>
+                <button *ngIf="mode==3" (click)="update()" type="button" class="btn btn-update btn-block">Actualizar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

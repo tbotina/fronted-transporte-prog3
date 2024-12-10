@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -20,7 +20,7 @@ export class ManageComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute, private service: ProductoService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false
     this.mode = 1;
-    this.producto = { id: 0, nombre: "" }
+    this.producto = { id: 0, nombre: "", cliente_id: 0, lote_id: 0 }
   }
 
   ngOnInit(): void {
@@ -44,7 +44,9 @@ export class ManageComponent implements OnInit {
     this.theFormGroup = this.theFormBuilder.group({
       // primer elemento del vector, valor por defecto
       // lista, serán las reglas
-      // nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      cliente_id: [null, Validators.required],
+      lote_id: [null, Validators.required]
       // idCiudad: [null, Validators.required]
     })
   }

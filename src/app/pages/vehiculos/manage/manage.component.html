@@ -51,12 +51,12 @@
                                     Municipio:
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" [(ngModel)]="vehiculo.municipio_id"
+                                    <input type="number" class="form-control" [(ngModel)]="vehiculo.municipio_id"
                                         [disabled]="mode==1" formControlName="municipio_id">
 
                                     <br>
                                     <div
-                                        *ngIf="getTheFormGroup.municipio_id.errors &&(getTheFormGroup.municipio_id.dirty|| getTheFormGroup.placa.touched)">
+                                        *ngIf="getTheFormGroup.municipio_id.errors &&(getTheFormGroup.municipio_id.dirty || getTheFormGroup.placa.touched)">
                                         <strong *ngIf="getTheFormGroup.municipio_id.errors.required"
                                             class="msnError">Requerido</strong>
 
@@ -74,11 +74,11 @@
 
                                     <br>
                                     <div
-                                        *ngIf="getTheFormGroup.tipo_vehiculo.errors &&(getTheFormGroup.tipo_vehiculo.dirty|| getTheFormGroup.tipo_vehiculo.touched)">
+                                        *ngIf="getTheFormGroup.tipo_vehiculo.errors && (getTheFormGroup.tipo_vehiculo.dirty || getTheFormGroup.tipo_vehiculo.touched)">
                                         <strong *ngIf="getTheFormGroup.tipo_vehiculo.errors.required"
                                             class="msnError">Requerido</strong>
                                         <strong
-                                            *ngIf="getTheFormGroup.tipo_vehiculo.errors.minlength||getTheFormGroup.tipo_vehiculo.errors.maxlength"
+                                            *ngIf="getTheFormGroup.tipo_vehiculo.errors.minlength || getTheFormGroup.tipo_vehiculo.errors.maxlength"
                                             class="msnError">invalido</strong>
 
                                     </div>

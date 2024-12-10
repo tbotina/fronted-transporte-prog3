@@ -2,103 +2,56 @@
 </div>
 <!-- Page content -->
 <div class="container-fluid mt--7">
-    <!-- Table -->
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-volver" (click)="volverVehiculo()">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <div class="card shadow">
-                <div class="card-header bg-transparent">
-                    <h3 *ngIf="mode === 1">visualizar</h3>
-                    <h3 *ngIf="mode === 2">crear</h3>
-                    <h3 *ngIf="mode === 3">actualizar</h3>
-                </div>
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-4">
-                                Id:
-                            </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control" [(ngModel)]="vehiculo.id" disabled>
-                            </div>
-                        </div>
-                        <form [formGroup]="theFormGroup">
-
-                            <div class="row">
-                                <div class="col-4">
-                                    Placa:
-                                </div>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" [(ngModel)]="vehiculo.placa"
-                                        [disabled]="mode==1" formControlName="placa">
-
-                                    <br>
-                                    <div
-                                        *ngIf="getTheFormGroup.placa.errors &&(getTheFormGroup.placa.dirty|| getTheFormGroup.placa.touched)">
-                                        <strong *ngIf="getTheFormGroup.placa.errors.required"
-                                            class="msnError">Requerido</strong>
-                                        <strong
-                                            *ngIf="getTheFormGroup.placa.errors.minlength||getTheFormGroup.placa.errors.maxlength"
-                                            class="msnError">invalido</strong>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    Municipio:
-                                </div>
-                                <div class="col-8">
-                                    <input type="number" class="form-control" [(ngModel)]="vehiculo.municipio_id"
-                                        [disabled]="mode==1" formControlName="municipio_id">
-
-                                    <br>
-                                    <div
-                                        *ngIf="getTheFormGroup.municipio_id.errors &&(getTheFormGroup.municipio_id.dirty || getTheFormGroup.placa.touched)">
-                                        <strong *ngIf="getTheFormGroup.municipio_id.errors.required"
-                                            class="msnError">Requerido</strong>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-4">
-                                    Tipo de Vehiculo:
-                                </div>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" [(ngModel)]="vehiculo.tipo_vehiculo"
-                                        [disabled]="mode==1" formControlName="tipo_vehiculo">
-
-                                    <br>
-                                    <div
-                                        *ngIf="getTheFormGroup.tipo_vehiculo.errors && (getTheFormGroup.tipo_vehiculo.dirty || getTheFormGroup.tipo_vehiculo.touched)">
-                                        <strong *ngIf="getTheFormGroup.tipo_vehiculo.errors.required"
-                                            class="msnError">Requerido</strong>
-                                        <strong
-                                            *ngIf="getTheFormGroup.tipo_vehiculo.errors.minlength || getTheFormGroup.tipo_vehiculo.errors.maxlength"
-                                            class="msnError">invalido</strong>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </form>
-
-                        <div class="row">
-                            <div class="col-4"></div>
-                            <div class="col-8">
-                                <button *ngIf="mode==2" (click)="create()" type="button"
-                                    class="btn btn-create btn-block">crear</button>
-                                <button *ngIf="mode==3" (click)="update()" type="button"
-                                    class="btn btn-update btn-block">actualizar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Button for creating new department -->
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-create" (click)="createVehiculo()">
+        <i class="fas fa-hand-paper"></i> Crear
+      </button>
     </div>
+  </div>
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Vehiculo</h3>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-1">ID</th>
+                <th class="col-2">Placa</th>
+                <th class="col-3">Municipio_id</th>
+                <th class="col-3">Tipo_vehiculo</th>
+                <th class="col-3">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let actual of vehiculos">
+                <td>{{actual.id}}</td>
+                <td>{{actual.placa}}</td>
+                <td>{{actual.municipio_id}}</td>
+                <td>{{actual.tipo_vehiculo}}</td>
+                <td>
+                  <button class="btn btn-view btn-sm" (click)="viewVehiculo(actual.id)">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteVehiculo(actual.id)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button class="btn btn-warning btn-sm" (click)="updateVehiculo(actual.id)">
+                    <i class="fas fa-edit"></i>                 
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+

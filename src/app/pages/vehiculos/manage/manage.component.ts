@@ -74,7 +74,7 @@ export class ManageComponent implements OnInit {
   }
   
   volverVehiculo(): void {
-    this.router.navigate(["vehiculo/list"])
+    this.router.navigate(["vehiculos/list"])
   }
 
   update() {

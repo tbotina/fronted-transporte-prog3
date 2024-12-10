@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Dueno } from 'src/app/models/dueno.model';
-import { DuenoService } from 'src/app/services/dueno/dueno.service';
+import { Conductor } from 'src/app/models/conductor.model';
+import { ConductorService } from 'src/app/services/conductor/conductor.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,22 +13,22 @@ import Swal from 'sweetalert2';
 export class ManageComponent implements OnInit {
 
   mode: number;
-  dueno: Dueno;
+  conductor: Conductor;
   theFormGroup: FormGroup;
   trySend: boolean;
 
-  constructor(private activateRoute: ActivatedRoute, private service: DuenoService, private router: Router, private theFormBuilder: FormBuilder) {
+  constructor(private activateRoute: ActivatedRoute, private service: ConductorService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;
     this.mode = 1;
-    this.dueno = { 
+    this.conductor = { 
       id: 0, 
       nombre: "", 
       //email: "", 
-      fecha_nacimiento: new Date(), 
+      fecha_nacimiento: new Date(""), 
       cedula: "", 
       security_id: "", 
-      vehiculos: [] 
-  }; // Se inicializa el objeto dueno con los atributos correctos
+      vehiculo:null 
+  }; // Se inicializa el objeto conductor con los atributos correctos
   }
 
   ngOnInit(): void {
@@ -44,8 +44,8 @@ export class ManageComponent implements OnInit {
       this.mode = 3;
     }
     if (this.activateRoute.snapshot.params.id) {
-      this.dueno.id = this.activateRoute.snapshot.params.id;
-      this.getDueno(this.dueno.id);
+      this.conductor.id = this.activateRoute.snapshot.params.id;
+      this.getConductor(this.conductor.id);
     }
   }
 
@@ -64,11 +64,11 @@ export class ManageComponent implements OnInit {
     return this.theFormGroup.controls;
   }
 
-  getDueno(id: number) {
+  getConductor(id: number) {
     this.service.view(id).subscribe(data => {
-      this.dueno = data;
-      console.log(JSON.stringify(this.dueno));
-      this.theFormGroup.patchValue(this.dueno); // Update form with the fetched data
+      this.conductor = data;
+      console.log(JSON.stringify(this.conductor));
+      this.theFormGroup.patchValue(this.conductor); // Update form with the fetched data
     });
   }
 
@@ -78,14 +78,14 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.create(this.dueno).subscribe(data => {
+    this.service.create(this.conductor).subscribe(data => {
       Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
-      this.router.navigate(["dueno/list"]);
+      this.router.navigate(["conductor/list"]);
     });
   }
   
-  volverDueno(): void {
-    this.router.navigate(["duenos/list"])
+  volverConductor(): void {
+    this.router.navigate(["conductors/list"])
   }
 
   update() {
@@ -94,9 +94,9 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.update(this.dueno).subscribe(data => {
+    this.service.update(this.conductor).subscribe(data => {
       Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success");
-      this.router.navigate(["dueno/list"]);
+      this.router.navigate(["conductor/list"]);
     });
   }
 }

@@ -32,6 +32,9 @@ export const AuthLayoutRoutes: Routes = [
     {
         path: "dirlistarorden", loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
     },
+    {
+        path: "conductores", loadChildren: () => import('src/app/pages/conductores/conductores.module').then(m => m.ConductoresModule)
+    },
     
 
 ];

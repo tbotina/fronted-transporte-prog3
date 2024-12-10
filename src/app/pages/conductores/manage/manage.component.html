@@ -5,7 +5,7 @@
     <!-- Table -->
     <div class="row">
         <div class="col">
-            <button class="btn btn-volver" (click)="volverDueno()">
+            <button class="btn btn-volver" (click)="volverConductor()">
                 <i class="fas fa-arrow-left"></i>
             </button>
             <div class="card shadow">
@@ -16,13 +16,12 @@
                 </div>
                 <div class="card-body">
                     <div class="container">
-
                         <div class="row mb-2">
                             <div class="col-4">
                                 Id:
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" [(ngModel)]="dueno.id" disabled>
+                                <input type="text" class="form-control" [(ngModel)]="conductor.id" disabled>
                             </div>
                         </div>
                         <form [formGroup]="theFormGroup">
@@ -32,7 +31,7 @@
                                     Nombre:
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" [(ngModel)]="dueno.nombre"
+                                    <input type="text" class="form-control" [(ngModel)]="conductor.nombre"
                                         [disabled]="mode==1" formControlName="nombre">
 
                                     <br>
@@ -50,7 +49,7 @@
                                     Email:
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" [(ngModel)]="dueno.email"
+                                    <input type="text" class="form-control" [(ngModel)]="conductor.email"
                                         [disabled]="mode==1" formControlName="email">
 
                                     <br>
@@ -71,7 +70,7 @@
                                     Nacimiento:
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" [(ngModel)]="dueno.fecha_nacimiento"
+                                    <input type="text" class="form-control" [(ngModel)]="conductor.fecha_nacimiento"
                                         [disabled]="mode==1" formControlName="fecha_nacimiento">
 
                                     <br>
@@ -92,7 +91,7 @@
                                     Cedula:
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" [(ngModel)]="dueno.cedula"
+                                    <input type="text" class="form-control" [(ngModel)]="conductor.cedula"
                                         [disabled]="mode==1" formControlName="cedula">
 
                                     <br>
@@ -110,7 +109,7 @@
                                     Security_id:
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" [(ngModel)]="dueno.security_id"
+                                    <input type="text" class="form-control" [(ngModel)]="conductor.security_id"
                                         [disabled]="mode==1" formControlName="security_id">
 
                                     <br>

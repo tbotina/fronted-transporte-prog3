@@ -5,7 +5,7 @@
   <!-- Button for creating new department -->
   <div class="row mb-3">
     <div class="col">
-      <button class="btn btn-create">
+      <button class="btn btn-create" (click)="createProduct()">
         <i class="fas fa-hand-paper"></i> Crear
       </button>
     </div>
@@ -23,6 +23,8 @@
               <tr>
                 <th class="col-1">ID</th>
                 <th class="col-2">Nombre</th>
+                <th class="col-2">Cliente_id</th>
+                <th class="col-2">Ruta_id</th>
                 <th class="col-3">Opciones</th>
               </tr>
             </thead>
@@ -30,6 +32,9 @@
               <tr *ngFor="let actual of productos">
                 <td>{{actual.id}}</td>
                 <td>{{actual.nombre}}</td>
+                <td>{{actual.cliente_id}}</td>
+                <td>{{actual.Ruta_id}}</td>
+                
                 <td>
                   <button class="btn btn-view btn-sm" (click)="viewProduct(actual.id)">
                     <i class="fas fa-eye"></i>
@@ -38,7 +43,7 @@
                     <i class="fas fa-trash-alt"></i>
                   </button>
                   <button class="btn btn-warning btn-sm" (click)="updateProduct(actual.id)">
-                    <i class="fas fa-user-edit"></i>                 
+                    <i class="fas fa-edit"></i>                 
                   </button>
                 </td>
               </tr>
@@ -49,61 +54,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-<!-- <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-</div> -->
-<!-- Page content -->
-<!-- <div class="container-fluid mt--7"> -->
-  <!-- Button for creating new department -->
-  <!-- <div class="row mb-3">
-    <div class="col">
-      <button class="btn btn-create" (click)="createProduct()">
-        <i class="fas fa-hand-paper"></i> Crear
-      </button>
-    </div>
-  </div> -->
-  <!-- Table -->
-  <!-- <div class="row">
-    <div class="col">
-      <div class="card shadow">
-        <div class="card-header bg-transparent">
-          <h3 class="mb-0">Productos</h3>
-        </div>
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th class="col-1">ID</th>
-                <th class="col-3">Nombre</th>
-                <th class="col-3">Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let actual of productos">
-                <td>{{actual.id}}</td>
-                <td>{{actual.nombre}}</td>
-                <td>
-                  <button class="btn btn-view btn-sm" (click)="viewProduct(actual.id)">
-                    <i class="fas fa-eye"></i>
-                  </button>
-                  <button class="btn btn-delete btn-sm" (click)="deleteProduct(actual.id)">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                  <button class="btn btn-update btn-sm" (click)="updateProduct(actual.id)">
-                    <i class="fas fa-user-edit"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->

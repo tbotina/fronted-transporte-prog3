@@ -1,6 +1,6 @@
 import { Vehiculo } from "./vehiculo.model";
 
-export class Dueño {
+export class Dueno {
     id?: number;
     nombre: string;
     email: string;

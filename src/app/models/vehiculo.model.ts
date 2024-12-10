@@ -1,5 +1,5 @@
 import { Conductor } from "./conductor.model";
-import { Dueño } from "./dueño.model";
+import { Dueno } from "./dueno.model";
 import { Ruta } from "./ruta.model";
 
 export class Vehiculo {
@@ -8,7 +8,7 @@ export class Vehiculo {
     tipo_vehiculo: string;
     municipio_id?: number;
     municipio?: string;
-    dueño?: Dueño;
+    dueno?: Dueno;
     conductor?: Conductor;
     ruta?: Ruta;
 }

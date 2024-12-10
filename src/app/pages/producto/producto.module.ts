@@ -15,7 +15,6 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ProductoRoutingModule,
-    CommonModule,
     FormsModule,
     ReactiveFormsModule
   ]

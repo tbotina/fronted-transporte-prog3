@@ -1,1 +1,56 @@
-<p>list works!</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Button for creating new department -->
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-create" (click)="createDirListaOrden()">
+        <i class="fas fa-hand-paper"></i> Crear
+      </button>
+    </div>
+  </div>
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Dir Lista Orden</h3>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-1">ID</th>
+                <th class="col-2">Orden</th>
+                <th class="col-2">ID Direccion</th>
+                <th class="col-2">ID Ruta</th>
+                <th class="col-2">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let actual of dirlistaordenes">
+                <td>{{actual.id}}</td>
+                <td>{{actual.orden}}</td>
+                <td>{{actual.direccion_id}}</td>
+                <td>{{actual.ruta_id}}</td>
+                <td>
+                  <button class="btn btn-view btn-sm" (click)="viewRuta(actual.id)">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteRuta(actual.id)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button class="btn btn-warning btn-sm" (click)="updateRuta(actual.id)">
+                    <i class="fas fa-edit"></i>                 
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

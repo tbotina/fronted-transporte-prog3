@@ -34,7 +34,7 @@ export const AdminLayoutRoutes: Routes = [
         ]
     },
     {
-        path: 'dir-lista-ordenes',
+        path: 'dirlistaordenes',
         children: [
             {
                 path: '',

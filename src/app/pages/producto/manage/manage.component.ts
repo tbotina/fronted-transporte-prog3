@@ -90,4 +90,8 @@ export class ManageComponent implements OnInit {
       this.router.navigate(["productos/list"])
     })
   }
+
+  volverProducto(): void {
+    this.router.navigate(["vehiculos/list"])
+  }
 }

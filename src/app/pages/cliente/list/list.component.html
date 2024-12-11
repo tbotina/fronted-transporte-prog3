@@ -1,0 +1,51 @@
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Button for creating new clients -->
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-create" (click)="createCliente()">
+        <i class="fas fa-user-plus"></i> Crear
+      </button>
+    </div>
+  </div>
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Cliente</h3>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-2">ID</th>
+                <th class="col-3">PersonaNatural_id</th>
+                <th class="col-3">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let actual of clientes">
+                <td>{{actual.id}}</td>
+                <td>{{actual.PersonaNatural_id}}</td>
+                <td>
+                  <button class="btn btn-view btn-sm" (click)="viewCliente(actual.id)">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteCliente(actual.id)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button class="btn btn-warning btn-sm" (click)="updateCliente(actual.id)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

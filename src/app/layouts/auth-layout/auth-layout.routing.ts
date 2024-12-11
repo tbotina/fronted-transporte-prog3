@@ -35,5 +35,8 @@ export const AuthLayoutRoutes: Routes = [
     {
         path: "personanatural", loadChildren: () => import('src/app/pages/persona-natural/persona-natural.module').then(m => m.PersonaNaturalModule)
     },
+    {
+        path: "cliente", loadChildren: () => import('src/app/pages/cliente/cliente.module').then(m => m.ClienteModule)
+    },
 
 ];

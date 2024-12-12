@@ -1,62 +1,64 @@
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
 </div>
-<!-- Page content -->
 <div class="container-fluid mt--7">
-    <!-- Table -->
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-volver" (click)="volverCliente()">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <div class="card shadow">
-                <div class="card-header bg-transparent">
-                    <h3 *ngIf="mode === 1">Visualizar</h3>
-                    <h3 *ngIf="mode === 2">Crear</h3>
-                    <h3 *ngIf="mode === 3">Actualizar</h3>
-                </div>
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-4">
-                                ID:
-                            </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control" [(ngModel)]="cliente.id" disabled>
-                            </div>
-                        </div>
-                        <form [formGroup]="theFormGroup">
-
-                            <div class="row">
-                                <div class="col-4">
-                                    Persona Natural ID:
-                                </div>
-                                <div class="col-8">
-                                    <input type="number" class="form-control" [(ngModel)]="cliente.PersonaNatural_id"
-                                        [disabled]="mode==1" formControlName="PersonaNatural_id">
-
-                                    <br>
-                                    <div
-                                        *ngIf="getTheFormGroup.PersonaNatural_id.errors &&(getTheFormGroup.PersonaNatural_id.dirty || getTheFormGroup.PersonaNatural_id.touched)">
-                                        <strong *ngIf="getTheFormGroup.PersonaNatural_id.errors.required"
-                                            class="msnError">Requerido</strong>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </form>
-
-                        <div class="row">
-                            <div class="col-4"></div>
-                            <div class="col-8">
-                                <button *ngIf="mode==2" (click)="create()" type="button"
-                                    class="btn btn-create btn-block">Crear</button>
-                                <button *ngIf="mode==3" (click)="update()" type="button"
-                                    class="btn btn-update btn-block">Actualizar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 *ngIf="mode === 1">Visualizar</h3>
+          <h3 *ngIf="mode === 2">Crear</h3>
+          <h3 *ngIf="mode === 3">Actualizar</h3>
         </div>
+        <div class="card-body">
+          <form [formGroup]="theFormGroup">
+            <div class="row">
+              <div class="col-4">ID:</div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="cliente.id" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">Nombre:</div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="cliente.nombre" [disabled]="mode == 1" formControlName="nombre">
+                <div *ngIf="getTheFormGroup.nombre.errors && (getTheFormGroup.nombre.dirty || getTheFormGroup.nombre.touched)">
+                  <strong *ngIf="getTheFormGroup.nombre.errors.required" class="msnError">Requerido</strong>
+                  <strong *ngIf="getTheFormGroup.nombre.errors.minlength || getTheFormGroup.nombre.errors.maxlength" class="msnError">Inválido</strong>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">Cédula:</div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="cliente.cedula" [disabled]="mode == 1" formControlName="cedula">
+                <div *ngIf="getTheFormGroup.cedula.errors && (getTheFormGroup.cedula.dirty || getTheFormGroup.cedula.touched)">
+                  <strong *ngIf="getTheFormGroup.cedula.errors.required" class="msnError">Requerido</strong>
+                  <strong *ngIf="getTheFormGroup.cedula.errors.pattern" class="msnError">Debe tener 10 dígitos</strong>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">Fecha de Nacimiento:</div>
+              <div class="col-8">
+                <input type="date" class="form-control" [(ngModel)]="cliente.fecha_nacimiento" [disabled]="mode == 1" formControlName="fecha_nacimiento">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">Security ID:</div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="cliente.security_id" [disabled]="mode == 1" formControlName="security_id">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-8">
+                <button *ngIf="mode == 2" (click)="create()" type="button" class="btn btn-create btn-block">Crear</button>
+                <button *ngIf="mode == 3" (click)="update()" type="button" class="btn btn-update btn-block">Actualizar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

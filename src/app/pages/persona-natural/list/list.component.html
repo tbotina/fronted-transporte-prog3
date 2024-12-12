@@ -1,8 +1,6 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
 </div>
-<!-- Page content -->
 <div class="container-fluid mt--7">
-  <!-- Button for creating new department -->
   <div class="row mb-3">
     <div class="col">
       <button class="btn btn-create" (click)="createDepartment()">
@@ -10,29 +8,31 @@
       </button>
     </div>
   </div>
-  <!-- Table -->
   <div class="row">
     <div class="col">
       <div class="card shadow">
         <div class="card-header bg-transparent">
-          <h3 class="mb-0">PersonaNatural</h3>
+          <h3 class="mb-0">Personas Naturales</h3>
         </div>
         <div class="card-body">
           <table class="table">
             <thead>
               <tr>
                 <th class="col-1">ID</th>
-                <th class="col-3">Name</th>
-                <th class="col-1">Role</th>
-                <th class="col-3">Opciones</th>
+                <th class="col-2">Nombre</th>
+                <th class="col-2">Cédula</th>
+                <th class="col-2">Fecha de Nacimiento</th>
+                <th class="col-2">Cliente ID</th>
+                <th class="col-2">Opciones</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let actual of personaNatural">
                 <td>{{actual._id}}</td>
-                <td>{{actual.name}}</td>
-                <td *ngIf="actual.role && actual.role.name">{{actual.role.name}}</td>
-                <td *ngIf="!actual.role || !actual.role.name"><span>No role</span></td>
+                <td>{{actual.nombre}}</td>
+                <td>{{actual.cedula}}</td>
+                <td>{{actual.fecha_nacimiento | date:'yyyy-MM-dd'}}</td>
+                <td>{{actual.cliente_id}}</td>
                 <td>
                   <button class="btn btn-view btn-sm" (click)="viewDepartment(actual._id)">
                     <i class="fas fa-eye"></i>

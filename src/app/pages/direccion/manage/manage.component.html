@@ -46,15 +46,15 @@
                                     Direccion:
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" [(ngModel)]="direccion.direcion"
-                                        [disabled]="mode==1" formControlName="direcion">
+                                    <input type="text" class="form-control" [(ngModel)]="direccion.direccion"
+                                        [disabled]="mode==1" formControlName="direccion">
 
                                     <br>
                                     <div
-                                        *ngIf="getTheFormGroup.direcion.errors && (getTheFormGroup.direcion.dirty || getTheFormGroup.direcion.touched)">
-                                        <strong *ngIf="getTheFormGroup.direcion.errors.required" class="msnError">Requerido</strong>
+                                        *ngIf="getTheFormGroup.direccion.errors && (getTheFormGroup.direccion.dirty || getTheFormGroup.direccion.touched)">
+                                        <strong *ngIf="getTheFormGroup.direccion.errors.required" class="msnError">Requerido</strong>
                                         <strong
-                                            *ngIf="getTheFormGroup.direcion.errors.minlength || getTheFormGroup.direcion.errors.maxlength"
+                                            *ngIf="getTheFormGroup.direccion.errors.minlength || getTheFormGroup.direccion.errors.maxlength"
                                             class="msnError">Invalido</strong>
 
                                     </div>

@@ -1,75 +1,62 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
-<!-- Page content -->
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
 <div class="container-fluid mt--7">
-  <!-- Table -->
   <div class="row">
     <div class="col">
       <div class="card shadow">
         <div class="card-header bg-transparent">
-          <h3 *ngIf="mode === 1">visualizar</h3>
-          <h3 *ngIf="mode === 2">crear</h3>
-          <h3 *ngIf="mode === 3">actualizar</h3>
+          <h3 *ngIf="mode === 1">Visualizar</h3>
+          <h3 *ngIf="mode === 2">Crear</h3>
+          <h3 *ngIf="mode === 3">Actualizar</h3>
         </div>
         <div class="card-body">
-          <div class="container">
+          <form [formGroup]="theFormGroup">
             <div class="row">
-              <div class="col-4">
-                Id:
-              </div>
+              <div class="col-4">ID:</div>
               <div class="col-8">
-                <input type="number" class="form-control" [(ngModel)]="personaNatural._id" [disabled]="mode==1">
+                <input type="text" class="form-control" [(ngModel)]="personaNatural._id" disabled>
               </div>
             </div>
-            
-            <form [formGroup]="theFormGroup">
-              <div class="row">
-                <div class="col-4">name:</div>
-                <div class="col-8">
-                  <input type="text" class="form-control" [(ngModel)]="personaNatural.name" 
-                   [disabled]="mode==1" formControlName="name">
-                  <br>
-                  <div *ngIf="getTheFormGroup.name.errors && (getTheFormGroup.name.dirty || getTheFormGroup.name.touched)">
-                    <strong *ngIf="getTheFormGroup.name.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.name.errors.minlength || getTheFormGroup.name.errors.maxlength" class="msnError">Inválido</strong>
-                  </div>
+            <div class="row">
+              <div class="col-4">Nombre:</div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="personaNatural.nombre" [disabled]="mode == 1" formControlName="nombre">
+                <div *ngIf="getTheFormGroup.nombre.errors && (getTheFormGroup.nombre.dirty || getTheFormGroup.nombre.touched)">
+                  <strong *ngIf="getTheFormGroup.nombre.errors.required" class="msnError">Requerido</strong>
+                  <strong *ngIf="getTheFormGroup.nombre.errors.minlength || getTheFormGroup.nombre.errors.maxlength" class="msnError">Inválido</strong>
                 </div>
               </div>
-
-              <div class="row">
-                <div class="col-4">email:</div>
-                <div class="col-8">
-                  <input type="text" class="form-control" [(ngModel)]="personaNatural.email" 
-                   [disabled]="mode==1" formControlName="email">
-                  <br>
-                  <div *ngIf="getTheFormGroup.email.errors && (getTheFormGroup.email.dirty || getTheFormGroup.email.touched)">
-                    <strong *ngIf="getTheFormGroup.email.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.email.errors.minlength || getTheFormGroup.email.errors.maxlength" class="msnError">Inválido</strong>
-                  </div>
+            </div>
+            <div class="row">
+              <div class="col-4">Cédula:</div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="personaNatural.cedula" [disabled]="mode == 1" formControlName="cedula">
+                <div *ngIf="getTheFormGroup.cedula.errors && (getTheFormGroup.cedula.dirty || getTheFormGroup.cedula.touched)">
+                  <strong *ngIf="getTheFormGroup.cedula.errors.required" class="msnError">Requerido</strong>
+                  <strong *ngIf="getTheFormGroup.cedula.errors.pattern" class="msnError">Debe tener 10 dígitos</strong>
                 </div>
               </div>
-
-              <div class="row">
-                <div class="col-4">password:</div>
-                <div class="col-8">
-                  <input type="text" class="form-control" [(ngModel)]="personaNatural.password" 
-                   [disabled]="mode==1" formControlName="password">
-                  <br>
-                  <div *ngIf="getTheFormGroup.password.errors && (getTheFormGroup.password.dirty || getTheFormGroup.password.touched)">
-                    <strong *ngIf="getTheFormGroup.password.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.password.errors.minlength || getTheFormGroup.password.errors.maxlength" class="msnError">Inválido</strong>
-                  </div>
-                </div>
+            </div>
+            <div class="row">
+              <div class="col-4">Fecha de Nacimiento:</div>
+              <div class="col-8">
+                <input type="date" class="form-control" [(ngModel)]="personaNatural.fecha_nacimiento" [disabled]="mode == 1" formControlName="fecha_nacimiento">
               </div>
-            </form>
-
+            </div>
+            <div class="row">
+              <div class="col-4">Cliente ID:</div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="personaNatural.cliente_id" [disabled]="mode == 1" formControlName="cliente_id">
+              </div>
+            </div>
             <div class="row">
               <div class="col-4"></div>
               <div class="col-8">
-                <button *ngIf="mode==2" (click)="create()" type="button" class="btn btn-create btn-block">crear</button>
-                <button *ngIf="mode==3" (click)="update()" type="button" class="btn btn-update btn-block">actualizar</button>
+                <button *ngIf="mode == 2" (click)="create()" type="button" class="btn btn-create btn-block">Crear</button>
+                <button *ngIf="mode == 3" (click)="update()" type="button" class="btn btn-update btn-block">Actualizar</button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

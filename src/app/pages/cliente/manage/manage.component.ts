@@ -6,7 +6,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-manage-cliente',
+  selector: 'app-manage',
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.scss']
 })
@@ -17,10 +17,21 @@ export class ManageComponent implements OnInit {
   theFormGroup: FormGroup;
   trySend: boolean;
 
-  constructor(private activateRoute: ActivatedRoute, private service: ClienteService, private router: Router, private theFormBuilder: FormBuilder) {
+  constructor(
+    private activateRoute: ActivatedRoute, 
+    private service: ClienteService,
+    private router: Router, 
+    private theFormBuilder: FormBuilder
+  ) {
     this.trySend = false;
     this.mode = 1;
-    this.cliente = { id: 0, PersonaNatural_id: 0 };
+    this.cliente = {
+      id: 0,
+      nombre: "",
+      cedula: "",
+      fecha_nacimiento: new Date(),
+      security_id: ""
+    };
   }
 
   ngOnInit(): void {
@@ -31,19 +42,22 @@ export class ManageComponent implements OnInit {
     }
     if (currentUrl.includes('create')) {
       this.mode = 2;
-    }
+    } 
     if (currentUrl.includes('update')) {
       this.mode = 3;
-    }
+    } 
     if (this.activateRoute.snapshot.params.id) {
-      this.cliente.id = this.activateRoute.snapshot.params.id;
+      this.cliente.id = +this.activateRoute.snapshot.params.id;
       this.getCliente(this.cliente.id);
     }
   }
 
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
-      PersonaNatural_id: ['', [Validators.required]],
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      cedula: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      fecha_nacimiento: ['', [Validators.required]],
+      security_id: ['', [Validators.maxLength(50)]]
     });
   }
 
@@ -54,10 +68,8 @@ export class ManageComponent implements OnInit {
   getCliente(id: number) {
     this.service.view(id).subscribe(data => {
       this.cliente = data;
-      console.log(JSON.stringify(this.cliente));
-      this.theFormGroup.patchValue(this.cliente); // Actualiza el formulario con los datos obtenidos
     });
-  }
+  }  
 
   create() {
     if (this.theFormGroup.invalid) {
@@ -65,14 +77,10 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.create(this.cliente).subscribe(data => {
+    this.service.create(this.cliente).subscribe(() => {
       Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
       this.router.navigate(["cliente/list"]);
     });
-  }
-
-  volverCliente(): void {
-    this.router.navigate(["clientes/list"]);
   }
 
   update() {
@@ -81,7 +89,7 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.update(this.cliente).subscribe(data => {
+    this.service.update(this.cliente).subscribe(() => {
       Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success");
       this.router.navigate(["cliente/list"]);
     });

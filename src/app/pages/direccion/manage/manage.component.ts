@@ -20,7 +20,7 @@ export class ManageComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute, private service: DireccionService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;
     this.mode = 1;
-    this.direccion = { id: 0, municipio_id: 0, direcion: "" };
+    this.direccion = { id: 0, municipio_id: 0, direccion: "" };
   }
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class ManageComponent implements OnInit {
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
       municipio_id: [0, [Validators.required]],
-      direcion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1500)]]
+      direccion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1500)]]
     });
   }
 

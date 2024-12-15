@@ -7,6 +7,6 @@ export class Conductor {
     fecha_nacimiento: Date;
     cedula: string;
     security_id?: string;
-    vehiculo?: Vehiculo;
+    vehiculos?: Vehiculo[];
     turno?: string;
 }

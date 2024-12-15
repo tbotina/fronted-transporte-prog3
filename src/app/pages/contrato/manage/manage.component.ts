@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Dueno } from 'src/app/models/dueno.model';
-import { DuenoService } from 'src/app/services/dueno/dueno.service';
+import { Contrato } from 'src/app/models/contrato.model';
+import { ContratoService } from 'src/app/services/contrato/contrato.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,24 +13,16 @@ import Swal from 'sweetalert2';
 export class ManageComponent implements OnInit {
 
   mode: number;
-  dueno: Dueno;
+  contrato: Contrato;
   theFormGroup: FormGroup;
   trySend: boolean;
 
   regexFecha = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00:00.000-[0123456789:]{5}$');
 
-  constructor(private activateRoute: ActivatedRoute, private service: DuenoService, private router: Router, private theFormBuilder: FormBuilder) {
+  constructor(private activateRoute: ActivatedRoute, private service: ContratoService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;
     this.mode = 1;
-    this.dueno = {
-      id: 0,
-      nombre: "",
-      //email: "", 
-      fecha_nacimiento: new Date(),
-      cedula: "",
-      security_id: "",
-      vehiculos: []
-    }; // Se inicializa el objeto dueno con los atributos correctos
+    this.contrato = { id: 0, fecha_creacion: "", cliente_id: 0 };
   }
 
   ngOnInit(): void {
@@ -46,19 +38,15 @@ export class ManageComponent implements OnInit {
       this.mode = 3;
     }
     if (this.activateRoute.snapshot.params.id) {
-      this.dueno.id = this.activateRoute.snapshot.params.id;
-      this.getDueno(this.dueno.id);
+      this.contrato.id = this.activateRoute.snapshot.params.id;
+      this.getContrato(this.contrato.id);
     }
   }
 
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      //email: ['', [Validators.required, Validators.email]],
-      fecha_nacimiento: ['', [Validators.required]],
-      cedula: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      security_id: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      vehiculo: [null, []]
+      fecha_creacion: ['', [Validators.required]],
+      cliente_id: ['', [Validators.required]]
     });
   }
 
@@ -66,12 +54,12 @@ export class ManageComponent implements OnInit {
     return this.theFormGroup.controls;
   }
 
-  getDueno(id: number) {
+  getContrato(id: number) {
     this.service.view(id).subscribe(data => {
-      this.dueno = data;
-      this.aplicarFuncionSiEsFecha(this.dueno);
-      console.log(JSON.stringify(this.dueno));
-      this.theFormGroup.patchValue(this.dueno); // Update form with the fetched data
+      this.contrato = data;
+      this.aplicarFuncionSiEsFecha(this.contrato);
+      console.log(JSON.stringify(this.contrato));
+      this.theFormGroup.patchValue(this.contrato); // Update form with the fetched data
     });
   }
 
@@ -81,40 +69,41 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.create(this.dueno).subscribe(data => {
+    this.service.create(this.contrato).subscribe(data => {
       Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
-      this.router.navigate(["dueno/list"]);
+      this.router.navigate(["contrato/list"]);
     });
   }
-
-  volverDueno(): void {
-    this.router.navigate(["duenos/list"])
+  
+  volverContrato(): void {
+    this.router.navigate(["contratos/list"])
   }
 
   update() {
     if (this.theFormGroup.invalid) {
       this.trySend = true;
+      console.log(this.contrato);
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.update(this.dueno).subscribe(data => {
+    this.service.update(this.contrato).subscribe(data => {
       Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success");
-      this.router.navigate(["dueno/list"]);
+      this.router.navigate(["contrato/list"]);
     });
   }
 
-  // Función que recibe un objeto y aplica una función si la propiedad es una fecha
+    // Función que recibe un objeto y aplica una función si la propiedad es una fecha
 
   aplicarFuncionSiEsFecha(obj: any) {
     for (let clave in obj) {
-      if (obj.hasOwnProperty(clave)) {
-        console.log(clave);
-        if (this.regexFecha.test(obj[clave])) {
-          console.log('Es una fecha');
-          // Aplica la función si la propiedad es un objeto Date
-          obj[clave] = this.formatDate(obj[clave]);
+        if (obj.hasOwnProperty(clave)) {
+            console.log(clave);
+            if (this.regexFecha.test(obj[clave])) {
+                console.log('Es una fecha');
+                // Aplica la función si la propiedad es un objeto Date
+                obj[clave] = this.formatDate(obj[clave]);
+            }
         }
-      }
     }
   }
 
@@ -125,4 +114,5 @@ export class ManageComponent implements OnInit {
     const day = ('0' + d.getDate()).slice(-2);
     return `${day}-${month}-${year}`;
   }
+  
 }

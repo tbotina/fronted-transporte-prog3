@@ -22,6 +22,7 @@ export class ListComponent implements OnInit {
 
   list() {
     this.service.list().subscribe((data) => {
+      console.log(data);
       this.productos = data;
     });
   }

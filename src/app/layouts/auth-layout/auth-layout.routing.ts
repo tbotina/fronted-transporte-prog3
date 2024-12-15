@@ -16,7 +16,7 @@ export const AuthLayoutRoutes: Routes = [
     { path: 'login',          component: LoginComponent },
 
     {
-        path: "administrador", loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
+        path: "administradores", loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
     },
     {
         path: "departamentos",
@@ -35,6 +35,9 @@ export const AuthLayoutRoutes: Routes = [
     {
         path: "conductores", loadChildren: () => import('src/app/pages/conductores/conductores.module').then(m => m.ConductoresModule)
     },
+    {
+        path: "contratos", loadChildren: () => import('src/app/pages/contrato/contrato.module').then(m => m.ContratoModule)
+    }
     
 
 ];

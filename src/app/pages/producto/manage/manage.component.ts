@@ -20,7 +20,7 @@ export class ManageComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute, private service: ProductoService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false
     this.mode = 1;
-    this.producto = { id: 0, nombre: "", cliente_id: 0, lote_id: 0 }
+    this.producto = { id: 0, nombre: "", descripcion: "", precio: 0, cliente_id: 0, lote_id: 0 }
   }
 
   ngOnInit(): void {

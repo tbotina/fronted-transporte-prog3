@@ -27,7 +27,7 @@ export class ManageComponent implements OnInit {
       fecha_nacimiento: new Date(""), 
       cedula: "", 
       security_id: "", 
-      vehiculo:null 
+      vehiculos:[] 
   }; // Se inicializa el objeto conductor con los atributos correctos
   }
 
@@ -85,7 +85,7 @@ export class ManageComponent implements OnInit {
   }
   
   volverConductor(): void {
-    this.router.navigate(["conductors/list"])
+    this.router.navigate(["conductores/list"])
   }
 
   update() {

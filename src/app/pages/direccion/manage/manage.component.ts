@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Administrador } from 'src/app/models/administrador.model';
-import { AdministradorService } from 'src/app/services/administrador.service';
+import { Direccion } from 'src/app/models/direccion.module';
+import { DireccionService } from 'src/app/services/direccion.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,28 +13,14 @@ import Swal from 'sweetalert2';
 export class ManageComponent implements OnInit {
 
   mode: number;
-  administrador: Administrador;
+  direccion: Direccion;
   theFormGroup: FormGroup;
   trySend: boolean;
 
-  constructor(
-    private activateRoute: ActivatedRoute, 
-    private service: AdministradorService,
-    private router: Router, 
-    private theFormBuilder: FormBuilder
-  ) {
+  constructor(private activateRoute: ActivatedRoute, private service: DireccionService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;
     this.mode = 1;
-    this.administrador = {
-      _id: "",
-      nombre: "",
-      email: "",
-      password: "",
-      role: "",
-      cedula: "",
-      fecha_nacimiento: new Date(),
-      security_id: ""
-    };
+    this.direccion = { id: 0, municipio_id: 0, direccion: "" };
   }
 
   ngOnInit(): void {
@@ -45,25 +31,20 @@ export class ManageComponent implements OnInit {
     }
     if (currentUrl.includes('create')) {
       this.mode = 2;
-    } 
+    }
     if (currentUrl.includes('update')) {
       this.mode = 3;
-    } 
+    }
     if (this.activateRoute.snapshot.params.id) {
-      this.administrador._id = this.activateRoute.snapshot.params.id;
-      this.getAdministrador(this.administrador._id);
+      this.direccion.id = Number(this.activateRoute.snapshot.params.id);
+      this.getDireccion(this.direccion.id);
     }
   }
 
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      email: ['', [Validators.email, Validators.maxLength(50)]],
-      password: ['', [Validators.minLength(6), Validators.maxLength(20)]],
-      role: ['', [Validators.maxLength(20)]],
-      cedula: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      fecha_nacimiento: ['', [Validators.required]],
-      security_id: ['', [Validators.maxLength(50)]]
+      municipio_id: [0, [Validators.required]],
+      direccion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1500)]]
     });
   }
 
@@ -71,11 +52,13 @@ export class ManageComponent implements OnInit {
     return this.theFormGroup.controls;
   }
 
-  getAdministrador(_id: string) {
-    this.service.view(_id).subscribe(data => {
-      this.administrador = data;
+  getDireccion(id: number) {
+    this.service.view(id).subscribe(data => {
+      this.direccion = data;
+      console.log(JSON.stringify(this.direccion));
+      this.theFormGroup.patchValue(this.direccion); // Update form with the fetched data
     });
-  }  
+  }
 
   create() {
     if (this.theFormGroup.invalid) {
@@ -83,10 +66,14 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.create(this.administrador).subscribe(() => {
+    this.service.create(this.direccion).subscribe(data => {
       Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
-      this.router.navigate(["administrador/list"]);
+      this.router.navigate(["direccion/list"]);
     });
+  }
+  
+  volverDireccion(): void {
+    this.router.navigate(["direccion/list"])
   }
 
   update() {
@@ -95,9 +82,9 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-    this.service.update(this.administrador).subscribe(() => {
+    this.service.update(this.direccion).subscribe(data => {
       Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success");
-      this.router.navigate(["administrador/list"]);
+      this.router.navigate(["direccion/list"]);
     });
   }
 }

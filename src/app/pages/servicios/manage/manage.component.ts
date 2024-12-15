@@ -71,7 +71,7 @@ export class ManageComponent implements OnInit {
     });
   }
   volverServicio(): void {
-    this.router.navigate(["servi/list"])
+    this.router.navigate(["servicios/list"])
   }
 
   update() {

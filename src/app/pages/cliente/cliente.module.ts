@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ServiciosRoutingModule } from './servicios-routing.module';
+import { ClienteRoutingModule } from './cliente-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListComponent } from './list/list.component';
 import { ManageComponent } from './manage/manage.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -14,10 +15,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    ServiciosRoutingModule,
+    ClienteRoutingModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule
   ]
 })
-export class ServiciosModule { }
+export class ClienteModule { }

@@ -1,5 +1,5 @@
 export class Direccion {
-    id:number
-    municipio_id:undefined
-    direcion: string
+    id?:number
+    municipio_id?:number
+    direccion: string
 }

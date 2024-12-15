@@ -1,0 +1,52 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Button for creating new address -->
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-create" (click)="createDireccion()">
+        <i class="fas fa-hand-paper"></i> Crear
+      </button>
+    </div>
+  </div>
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Direccion</h3>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-1">ID</th>
+                <th class="col-3">Municipio_id</th>
+                <th class="col-5">Direccion</th>
+                <th class="col-3">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let actual of direccion">
+                <td>{{actual.id}}</td>
+                <td>{{actual.municipio_id}}</td>
+                <td>{{actual.direccion}}</td>
+                <td>
+                  <button class="btn btn-view btn-sm" (click)="viewDireccion(actual.id)">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteDireccion(actual.id)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button class="btn btn-warning btn-sm" (click)="updateDireccion(actual.id)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

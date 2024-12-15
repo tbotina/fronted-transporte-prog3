@@ -5,14 +5,41 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
-import * as path from 'path';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'user-profile', component: UserProfileComponent },
-    { path: 'tables', component: TablesComponent },
-    { path: 'icons', component: IconsComponent },
-    { path: 'maps', component: MapsComponent },
+    { path: 'dashboard',      component: DashboardComponent },
+    { path: 'user-profile',canActivate:[AuthGuard],   component: UserProfileComponent },
+    { path: 'tables',         component: TablesComponent },
+    { path: 'icons',          component: IconsComponent },
+    { path: 'maps',           component: MapsComponent },
+    {path:"administrador",
+        canActivate:[AuthGuard],
+    loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
+    },
+    {
+        path: "departamentos",
+        loadChildren: () => import('src/app/pages/departamentos/departamentos.module').then(m => m.DepartamentosModule)
+    },
+    {
+        path: "servicios",canActivate:[AuthGuard],
+        loadChildren: () => import('src/app/pages/servicios/servicios.module').then(m => m.ServiciosModule)
+    },
+    {
+
+        path: "direccion", loadChildren: () => import('src/app/pages/direccion/direccion.module').then(m => m.DireccionModule)
+    },
+    {
+        path: "dirlistarorden", loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
+    },
+    {
+        path: "personanatural", loadChildren: () => import('src/app/pages/persona-natural/persona-natural.module').then(m => m.PersonaNaturalModule)
+    },
+    {
+        path: "cliente", loadChildren: () => import('src/app/pages/cliente/cliente.module').then(m => m.ClienteModule)
+    },
+
+
 
     {
         path: 'productos',

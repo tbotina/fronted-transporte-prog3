@@ -24,7 +24,7 @@ export class ServiciosService {
   create(newServicio: Servicios): Observable<Servicios> {
     return this.http.post<Servicios>(
       `${environment.url_ms_negocio}/servicios`,newServicio
-    );
+    )
   }
   update(theServicio: Servicios): Observable<Servicios> {
     return this.http.put<Servicios>(

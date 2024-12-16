@@ -20,7 +20,7 @@ export class ManageComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute, private service: RutaService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;
     this.mode = 1;
-    this.ruta = { id: 0, contrato_id: 0, vehiculo_id: 0, recorrido: false };
+    this.ruta = { id: 0, contrato_id: 0, vehiculo_id: 0, recorrida: false };
   }
 
   ngOnInit(): void {
@@ -28,6 +28,7 @@ export class ManageComponent implements OnInit {
     const currentUrl = this.activateRoute.snapshot.url.join('/');
     if (currentUrl.includes('view')) {
       this.mode = 1;
+      console.log("Modo vista", this.mode);
     }
     if (currentUrl.includes('create')) {
       this.mode = 2;
@@ -44,7 +45,7 @@ export class ManageComponent implements OnInit {
     this.theFormGroup = this.theFormBuilder.group({
       vehiculo_id: [true, [Validators.required]],
       contrato_id: [true, [Validators.required]],
-      recorrido: [false, [Validators.required]]
+      recorrida: [false, [Validators.required]]
     });
   }
 

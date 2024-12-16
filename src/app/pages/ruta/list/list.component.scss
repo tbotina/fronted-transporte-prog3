@@ -99,3 +99,34 @@ $update-gradient: linear-gradient(to right, goldenrod, lightgoldenrodyellow);
 .btn-update:hover {
   background: linear-gradient(to right, goldenrod, khaki);
 }
+
+
+
+/* Estilo general para el checkbox */
+input[type="checkbox"] {
+  -webkit-appearance: none; /* Quita el estilo predeterminado en navegadores WebKit */
+  appearance: none; /* Quita el estilo predeterminado */
+  width: 24px; /* Ancho del checkbox */
+  height: 24px; /* Alto del checkbox */
+  border: 2px solid #4CAF50; /* Borde verde */
+  border-radius: 4px; /* Bordes redondeados */
+  outline: none; /* Quita el contorno al hacer clic */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: background-color 0.3s, border-color 0.3s; /* Transición suave para cambios de color */
+}
+
+/* Estilo cuando el checkbox está marcado */
+input[type="checkbox"]:checked {
+  background-color: #4CAF50; /* Color de fondo verde cuando está marcado */
+  border-color: #388E3C; /* Color del borde cuando está marcado */
+}
+
+/* Estilo adicional para crear una marca de verificación (check) */
+input[type="checkbox"]:checked::after {
+  content: '✓'; /* Marca de verificación */
+  color: white; /* Color de la marca */
+  font-size: 18px; /* Tamaño de la marca */
+  position: relative;
+  left: 4px; /* Ajuste de posición horizontal */
+  top: -2px; /* Ajuste de posición vertical */
+}

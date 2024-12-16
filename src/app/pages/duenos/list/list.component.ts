@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Dueno } from 'src/app/models/dueno.model';
 import { DuenoService } from 'src/app/services/dueno/dueno.service';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,12 +15,33 @@ export class ListComponent implements OnInit {
   regexFecha = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00:00.000-[0123456789:]{5}$');
 
   constructor(private service: DuenoService,
-    private router: Router) {
+              private router: Router,
+              private activateRoute: ActivatedRoute) {
     this.duenos = [];
   }
 
   ngOnInit(): void {
-    this.list();
+        
+    switch (this.activateRoute.routeConfig?.path){
+
+      case 'list/:id/vehiculos':
+        this.duenosVehiculos(this.activateRoute.snapshot.params.id);
+        break;
+
+      case 'list':
+        this.list();
+        break;
+    }
+  }
+  
+  duenosVehiculos(id: any) {
+    this.service.duenosVehiculos(id).subscribe((data) => {
+      console.log(data); 
+      this.duenos = data;
+      this.duenos.forEach(dueno => { 
+        this.aplicarFuncionSiEsFecha(dueno);
+      });
+    });
   }
 
   list() {

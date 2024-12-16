@@ -66,6 +66,10 @@ export class ManageComponent implements OnInit {
     return this.theFormGroup.controls;
   }
 
+  atras(){
+    window.history.back();
+  }
+  
   getDueno(id: number) {
     this.service.view(id).subscribe(data => {
       this.dueno = data;

@@ -21,12 +21,12 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(localStorage.getItem('data') != null){
-      const data = JSON.parse(localStorage.getItem('data'));
-      if(data.token == null){
-        this.router.navigate(["/login"]);
-    }
-  }
+  //   if(localStorage.getItem('data') != null){
+  //     const data = JSON.parse(localStorage.getItem('data'));
+  //     if(data.token == null){
+  //       this.router.navigate(["/login"]);
+  //   }
+  // }
     
     switch (this.activateRoute.routeConfig?.path){
 

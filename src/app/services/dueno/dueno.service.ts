@@ -9,6 +9,7 @@ import { Dueno } from "src/app/models/dueno.model";
 })
 export class DuenoService {
   constructor(private http: HttpClient) {}
+
   list(): Observable<Dueno[]> {
     return this.http
       .get<{ data: Dueno[] }>(
@@ -16,6 +17,15 @@ export class DuenoService {
       )
       .pipe(map((response) => response.data));
   }
+
+  duenosVehiculos(id: number): Observable<Dueno[]> {  
+    return this.http
+      .get<{ data: Dueno[] }>(
+        `${environment.url_ms_negocio}/duenos/${id}/vehiculos`
+      )
+      .pipe(map((response) => response.data));
+  }
+
   view(id: number): Observable<Dueno> {
     return this.http.get<Dueno>(
       `${environment.url_ms_negocio}/duenos/${id}`

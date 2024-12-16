@@ -16,78 +16,79 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private securityService: SecurityService,
 
-    private router:Router) { }
+    private router: Router) { }
 
 
-intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
 
-let theUser = this.securityService.activeUserSession
+    let theUser = this.securityService.activeUserSession
 
-const token = theUser["token"];
+    const token = theUser["token"];
 
-// Si la solicitud es para la ruta de "login", no adjuntes el token
+    // Si la solicitud es para la ruta de "login", no adjuntes el token
 
-if (request.url.includes('/login') || request.url.includes('/token-validation')) {
+    if (request.url.includes('/login') || request.url.includes('/token-validation')) {
 
-console.log("no se pone token")
+      console.log("no se pone token")
 
-return next.handle(request);
+      return next.handle(request);
 
-} else {
+    } else {
 
-console.log("colocando token " + token)
+      console.log("colocando token " + token)
 
-// Adjunta el token a la solicitud
+      // Adjunta el token a la solicitud
 
-const authRequest = request.clone({
+      const authRequest = request.clone({
 
-setHeaders: {
+        setHeaders: {
 
-Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
 
-},
+        },
 
-});
+      });
 
-return next.handle(authRequest).pipe(
+      return next.handle(authRequest).pipe(
 
-catchError((err: HttpErrorResponse) => {
+        catchError((err: HttpErrorResponse) => {
 
-if (err.status === 401) {
+          if (err.status === 401) {
 
-  Swal.fire({
+            Swal.fire({
 
-    title: 'No está autorizado para esta operación',
+              title: 'No está autorizado para esta operación',
 
-    icon: 'error',
+              icon: 'error',
 
-    timer: 5000
+              timer: 5000
 
-  });
+            });
 
-  this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/dashboard');
 
-}else if (err.status === 400) {
+          } else if (err.status === 400) {
 
-  Swal.fire({
+            Swal.fire({
 
-    title: 'Existe un error, contacte al administrador',
+              title: 'Existe un error, contacte al administrador',
 
-    icon: 'error',
+              icon: 'error',
 
-    timer: 5000
+              timer: 5000
 
-  });
+            });
 
-}
-
-
-
-return new Observable<never>();
+          }
 
 
 
-}));
-}}
+          return new Observable<never>();
+
+
+
+        }));
+    }
+  }
 }

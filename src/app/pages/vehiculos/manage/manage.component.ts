@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.scss']
 })
+
 export class ManageComponent implements OnInit {
 
   mode: number;
@@ -53,6 +54,10 @@ export class ManageComponent implements OnInit {
     return this.theFormGroup.controls;
   }
 
+  atras(){
+    window.history.back();
+  }
+
   getVehiculo(id: number) {
     this.service.view(id).subscribe(data => {
       this.vehiculo = data;
@@ -69,7 +74,7 @@ export class ManageComponent implements OnInit {
     }
     this.service.create(this.vehiculo).subscribe(data => {
       Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
-      this.router.navigate(["vehiculo/list"]);
+      this.router.navigate(["vehiculos/list"]);
     });
   }
   

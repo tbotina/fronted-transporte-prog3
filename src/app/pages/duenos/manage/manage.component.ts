@@ -26,7 +26,7 @@ export class ManageComponent implements OnInit {
       id: 0,
       nombre: "",
       //email: "", 
-      fecha_nacimiento: new Date(),
+      fecha_nacimiento: "",
       cedula: "",
       security_id: "",
       vehiculos: []

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vehiculo } from 'src/app/models/vehiculo.model';
 import { VehiculoService } from 'src/app/services/vehiculo/vehiculo.service';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,12 +13,40 @@ export class ListComponent implements OnInit {
   vehiculos: Vehiculo[]; // Array de vehiculo
   
   constructor(private service: VehiculoService,
-              private router:Router) { 
+              private router:Router,
+              private activateRoute: ActivatedRoute
+            ) { 
     this.vehiculos = [];
   }
 
   ngOnInit(): void {
-    this.list();
+
+    if(localStorage.getItem('data') != null){
+      const data = JSON.parse(localStorage.getItem('data'));
+      if(data.token == null){
+        this.router.navigate(["/login"]);
+    }
+  }
+    
+    switch (this.activateRoute.routeConfig?.path){
+
+      case 'list/:id/duenos':
+        this.vehiculosDuenos(this.activateRoute.snapshot.params.id);
+        break;
+
+      case 'list/:id/conductores':
+        this.vehiculosConductores(this.activateRoute.snapshot.params.id);
+        break;
+
+      case 'list/:id/contratos':
+        this.vehiculosContratos(this.activateRoute.snapshot.params.id);
+        break;
+
+      case 'list':
+        this.list();
+        break;
+    }
+
   }
 
   list(){
@@ -27,6 +55,25 @@ export class ListComponent implements OnInit {
       this.vehiculos = data;
       }
     );
+  }
+
+  vehiculosDuenos(id:number){
+    this.service.vehiculosDuenos(id).subscribe((data) => {
+      this.vehiculos = data;
+    });
+  }
+
+  vehiculosConductores(id:number){ 
+    this.service.vehiculosConductores(id).subscribe((data) => {
+      console.log(data)
+      this.vehiculos = data;
+    });
+  }
+
+  vehiculosContratos(id:number){
+    this.service.vehiculosContratos(id).subscribe((data) => {
+      this.vehiculos = data;
+    });
   }
 
   deleteVehiculo(id: number): void {

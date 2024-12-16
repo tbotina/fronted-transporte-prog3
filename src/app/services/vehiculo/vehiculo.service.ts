@@ -9,6 +9,7 @@ import { Vehiculo } from "src/app/models/vehiculo.model";
 })
 export class VehiculoService {
   constructor(private http: HttpClient) {}
+  
   list(): Observable<Vehiculo[]> {
     return this.http
       .get<{ data: Vehiculo[] }>(
@@ -16,6 +17,31 @@ export class VehiculoService {
       )
       .pipe(map((response) => response.data));
   }
+
+  vehiculosDuenos(id: number): Observable<Vehiculo[]> {
+    return this.http
+      .get<{ data: Vehiculo[] }>(
+        `${environment.url_ms_negocio}/vehiculos/${id}/duenos`
+      )
+      .pipe(map((response) => response.data));
+  }
+
+  vehiculosConductores(id: number): Observable<Vehiculo[]> {
+    return this.http
+      .get<{ data: Vehiculo[] }>(
+        `${environment.url_ms_negocio}/vehiculos/${id}/conductores`
+      )
+      .pipe(map((response) => response.data));
+  }
+
+  vehiculosContratos(id: number): Observable<Vehiculo[]> {
+    return this.http
+      .get<{ data: Vehiculo[] }>(
+        `${environment.url_ms_negocio}/vehiculos/${id}/contratos`
+      )
+      .pipe(map((response) => response.data));
+  }
+
   view(id: number): Observable<Vehiculo> {
     return this.http.get<Vehiculo>(
       `${environment.url_ms_negocio}/vehiculos/${id}`

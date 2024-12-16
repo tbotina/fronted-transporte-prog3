@@ -27,10 +27,10 @@ export class ListComponent implements OnInit {
     // Llamada al dueno para obtener la lista de dueno
     this.service.list().subscribe((data) => {
       this.duenos = data;
-      this.duenos.forEach(element => {
-        this.aplicarFuncionSiEsFecha(element);
-      }
-      );
+      this.duenos.forEach(dueno => { 
+        this.aplicarFuncionSiEsFecha(dueno);
+      });
+   });
     }
 
   deleteDueno(id: number): void {
@@ -78,28 +78,7 @@ export class ListComponent implements OnInit {
     console.log('Crear un nuevo dueno');
     }
 
-      // Función que recibe un objeto y aplica una función si la propiedad es una fecha
-
-      aplicarFuncionSiEsFecha(obj: any) {
-      for(let clave in obj) {
-        if (obj.hasOwnProperty(clave)) {
-          console.log(clave);
-          if (this.regexFecha.test(obj[clave])) {
-            console.log('Es una fecha');
-            // Aplica la función si la propiedad es un objeto Date
-            obj[clave] = this.formatDate(obj[clave]);
-          }
-        }
-      }
-    }
-    
-      formatDate(date: Date | string): string {
-      const d = new Date(date);
-      const year = d.getFullYear();
-      const month = ('0' + (d.getMonth() + 1)).slice(-2); // Meses empiezan en 0
-      const day = ('0' + d.getDate()).slice(-2);
-      return `${day}-${month}-${year}`;
-    }    // Función que recibe un objeto y aplica una función si la propiedad es una fecha
+    // Función para aplicar una función a un objeto si es una fecha
 
       aplicarFuncionSiEsFecha(obj: any) {
       for(let clave in obj) {

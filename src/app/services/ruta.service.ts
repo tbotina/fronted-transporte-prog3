@@ -12,7 +12,15 @@ export class RutaService {
   constructor(private http: HttpClient) { }
 
   list(): Observable<Ruta[]> {
-    return this.http.get<{data: Ruta[]}>(`${environment.url_ms_negocio}/rutas`).pipe(map((response)=> response.data));
+    return this.http.get<{ data: Ruta[] }>(`${environment.url_ms_negocio}/rutas`).pipe(map((response) => response.data));
+  }
+
+  rutasVehiculos(id: any) {
+    return this.http.get<{ data: Ruta[] }>(`${environment.url_ms_negocio}/rutas/${id}/vehiculos`).pipe(map((response) => response.data));
+  }
+
+  setRecorrido(id: number, rec: boolean): Observable<any> {
+    return this.http.post(`${environment.url_ms_negocio}/rutas/${id}/recorrido`, {recorrido:rec});
   }
 
   view(id: number): Observable<Ruta> {
@@ -32,24 +40,24 @@ export class RutaService {
       contratoId: Number(ruta.contrato_id),
       vehiculoId: Number(ruta.vehiculo_id)
     };
-  
+
     console.log('Payload enviado al backend:', payload);
-  
+
     return this.http.post(`${environment.url_ms_negocio}/rutas`, payload);
   }
-  
+
   update(ruta: Ruta): Observable<any> {
     // Transformar los nombres de las propiedades antes de enviarlas
     const payload = {
       contratoId: Number(ruta.contrato_id),
       vehiculoId: Number(ruta.vehiculo_id)
     };
-  
+
     console.log('Payload enviado al backend para actualizar:', payload);
-  
+
     return this.http.put(`${environment.url_ms_negocio}/rutas/${ruta.id}`, payload);
   }
-  
+
   // update(TheRuta: Ruta): Observable<Ruta> {
   //   return this.http.put<Ruta>(`${environment.url_ms_negocio}/rutas/${TheRuta.id}`, TheRuta);
   // }

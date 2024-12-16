@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RutaService } from 'src/app/services/ruta.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ruta } from 'src/app/models/ruta.model';
 
 @Component({
@@ -12,18 +12,37 @@ import { Ruta } from 'src/app/models/ruta.model';
 export class ListComponent implements OnInit {
 
   rutas: Ruta[]
-  constructor(private service:RutaService, private router: Router) { 
+  constructor(private service: RutaService, private router: Router,
+    private activateRoute: ActivatedRoute
+  ) { 
     this.rutas = []
   }
 
   ngOnInit(): void {
-    this.list();
+
+    switch (this.activateRoute.routeConfig?.path) {
+
+      case 'list/:id/vehiculos':
+        this.rutasVehiculos(this.activateRoute.snapshot.params.id);
+        break;
+
+      case 'list':
+        this.list();
+        break;
+    }
   }
 
-  list(){
+  list() {
     this.service.list().subscribe(data => {
       this.rutas = data;
       console.log(JSON.stringify(this.rutas))
+    });
+  }
+
+  rutasVehiculos(id: any) {
+    this.service.rutasVehiculos(id).subscribe((data) => {
+      console.log(data);
+      this.rutas = data;
     });
   }
 

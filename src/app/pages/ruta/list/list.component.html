@@ -22,9 +22,10 @@
             <thead>
               <tr>
                 <th class="col-1">ID</th>
-                <th class="col-2">ID Vehiculo</th>
-                <th class="col-2">ID Contrato</th>
-                <th class="col-2">Opciones</th>
+                <th class="col-3">ID Vehiculo</th>
+                <th class="col-3">ID Contrato</th>
+                <th class="col-2">Recorrida</th>
+                <th class="col-3">Opciones</th>
               </tr>
             </thead>
             <tbody>
@@ -32,6 +33,7 @@
                 <td>{{actual.id}}</td>
                 <td>{{actual.vehiculo_id}}</td>
                 <td>{{actual.contrato_id}}</td>
+                <td>{{actual.recorrida}}</td>
                 <td>
                   <button class="btn btn-view btn-sm" (click)="viewRuta(actual.id)">
                     <i class="fas fa-eye"></i>

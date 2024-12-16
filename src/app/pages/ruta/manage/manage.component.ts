@@ -20,7 +20,7 @@ export class ManageComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute, private service: RutaService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;
     this.mode = 1;
-    this.ruta = { id: 0, contrato_id: 0, vehiculo_id: 0 };
+    this.ruta = { id: 0, contrato_id: 0, vehiculo_id: 0, recorrido: false };
   }
 
   ngOnInit(): void {
@@ -43,12 +43,17 @@ export class ManageComponent implements OnInit {
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
       vehiculo_id: [true, [Validators.required]],
-      contrato_id: [true, [Validators.required]]
+      contrato_id: [true, [Validators.required]],
+      recorrido: [false, [Validators.required]]
     });
   }
 
   get getTheFormGroup() {
     return this.theFormGroup.controls;
+  }
+
+  atras() {
+    window.history.back();
   }
 
   getRuta(id: number) {
@@ -58,32 +63,19 @@ export class ManageComponent implements OnInit {
     });
   }
 
-  // create() {
-  //   if (this.theFormGroup.invalid) {
-  //     this.trySend = true
-  //     Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error")
-  //     return
-  //   }
-  //   console.log("Esta es una ruta", this.ruta)
-  //   this.service.create(this.ruta).subscribe(data => {
-  //     Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success")
-  //     this.router.navigate(["rutas/list"])
-  //   })
-  // }
-
   create() {
     if (this.theFormGroup.invalid) {
       this.trySend = true;
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-  
+
     // Asignar valores del formulario a la ruta
     this.ruta.vehiculo_id = this.theFormGroup.value.vehiculo_id;
     this.ruta.contrato_id = this.theFormGroup.value.contrato_id;
-  
+
     console.log("Esta es una ruta", this.ruta);
-  
+
     this.service.create(this.ruta).subscribe({
       next: (data) => {
         Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
@@ -95,19 +87,6 @@ export class ManageComponent implements OnInit {
       }
     });
   }
-  
-  // update() {
-  //   if (this.theFormGroup.invalid) {
-  //     this.trySend = true
-  //     Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error")
-  //     return
-  //   }
-  //   this.service.update(this.ruta).subscribe(data => {
-  //     Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success")
-  //     console.log("Actualización de ruta", this.ruta)
-  //     this.router.navigate(["rutas/list"])
-  //   })
-  // }
 
   update() {
     if (this.theFormGroup.invalid) {
@@ -115,18 +94,18 @@ export class ManageComponent implements OnInit {
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
     }
-  
+
     this.ruta.vehiculo_id = this.theFormGroup.value.vehiculo_id;
     this.ruta.contrato_id = this.theFormGroup.value.contrato_id;
-  
+
     console.log("Actualización de ruta", this.ruta);
-  
+
     this.service.update(this.ruta).subscribe(data => {
       Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success");
       this.router.navigate(["rutas/list"]);
     });
   }
-  
+
   volverRuta(): void {
     this.router.navigate(["rutas/list"])
   }

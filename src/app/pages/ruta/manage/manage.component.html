@@ -3,7 +3,7 @@
 <!-- Page content -->
 <div class="container-fluid mt--7">
   <!-- Table -->
-  <button class="btn btn-volver" (click)="volverRuta()">
+  <button class="btn btn-volver" (click)="atras()">
     <i class="fas fa-arrow-left"></i></button>
   <div class="row">
     <div class="col">
@@ -48,6 +48,28 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-4">Recorrido</div>
+                <div class="col-8">
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="recorridoCheckbox"
+                      [(ngModel)]="ruta.recorrido"
+                      formControlName="recorrido"
+                    />
+                    <label class="form-check-label" for="recorridoCheckbox"></label>
+                  </div>
+                  <br />
+                  <div
+                    *ngIf="getTheFormGroup.recorrido.errors && (getTheFormGroup.recorrido.dirty || getTheFormGroup.recorrido.touched)"
+                  >
+                    <strong *ngIf="getTheFormGroup.recorrido.errors.required" class="msnError">Requerido</strong>
+                  </div>
+                </div>
+              </div>
+              
             </form>
             <div class="row">
               <div class="col-4"></div>

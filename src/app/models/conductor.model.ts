@@ -4,7 +4,7 @@ export class Conductor {
     id?: number;
     nombre: string;
     //email: string;
-    fecha_nacimiento: Date;
+    fecha_nacimiento: string;
     cedula: string;
     security_id?: string;
     vehiculos?: Vehiculo[];

@@ -16,6 +16,15 @@ export class ConductorService {
       )
       .pipe(map((response) => response.data));
   }
+
+  conductoresVehiculos(id: number): Observable<Conductor[]> {
+    return this.http
+      .get<{ data: Conductor[] }>(
+        `${environment.url_ms_negocio}/conductores/${id}/vehiculos`
+      )
+      .pipe(map((response) => response.data));
+  }
+
   view(id: number): Observable<Conductor> {
     return this.http.get<Conductor>(
       `${environment.url_ms_negocio}/conductores/${id}`

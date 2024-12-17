@@ -1,117 +1,111 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-</div>
-<!-- Page content -->
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
 <div class="container-fluid mt--7">
-  <!-- Table -->
   <button class="btn btn-volver" (click)="volverLote()">
-    <i class="fas fa-arrow-left"></i></button>
+    <i class="fas fa-arrow-left"></i>
+  </button>
   <div class="row">
     <div class="col">
       <div class="card shadow">
         <div class="card-header bg-transparent">
-          <h3 *ngIf="mode === 1">Visualizar</h3>
-          <h3 *ngIf="mode === 2">Crear</h3>
-          <h3 *ngIf="mode === 3">Actualizar</h3>
+          <h3 *ngIf="mode === 1">Visualizar Lote</h3>
+          <h3 *ngIf="mode === 2">Crear Lote</h3>
+          <h3 *ngIf="mode === 3">Actualizar Lote</h3>
         </div>
         <div class="card-body">
-          <div class="container">
-            <div class="row">
-              <div class="col-4">Id:</div>
-              <div class="col-8"><input type="text" class="form-control" [(ngModel)]="lote.id" disabled> </div>
-            </div>
-            <form [formGroup]="theFormGroup">
-              <div class="row">
-                <div class="col-4">Cantidad productos</div>
-                <div class="col-8">
-                  <input type="text" class="form-control" [(ngModel)]="lote.cantidad_productos" [disabled]="mode==1"
-                    formControlName="cantidad_productos">
-                  <br>
-                  <div
-                    *ngIf="getTheFormGroup.cantidad_productos.errors &&(getTheFormGroup.cantidad_productos.dirty|| getTheFormGroup.cantidad_productos.touched)">
-                    <strong *ngIf="getTheFormGroup.cantidad_productos.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.cantidad_productos.errors.minlength||getTheFormGroup.cantidad_productos.errors.maxlength"
-                      class="msnError">invalido</strong>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">Peso total</div>
-                <div class="col-8">
-                  <input type="text" class="form-control" [(ngModel)]="lote.peso_total" [disabled]="mode==1" formControlName="peso_total">
-                  <br>
-                  <div
-                    *ngIf="getTheFormGroup.peso_total.errors &&(getTheFormGroup.peso_total.dirty|| getTheFormGroup.peso_total.touched)">
-                    <strong *ngIf="getTheFormGroup.peso_total.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.peso_total.errors.minlength||getTheFormGroup.peso_total.errors.maxlength"
-                      class="msnError">invalido</strong>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">Fecha creación</div>
-                <div class="col-8">
-                  <input type="text" class="form-control" [(ngModel)]="lote.fecha_creacion" [disabled]="mode==1"
-                    formControlName="fecha_creacion">
-                  <br>
-                  <div
-                    *ngIf="getTheFormGroup.fecha_creacion.errors &&(getTheFormGroup.fecha_creaciondirty|| getTheFormGroup.fecha_creacion.touched)">
-                    <strong *ngIf="getTheFormGroup.fecha_creacion.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.fecha_creacion.errors.minlength||getTheFormGroup.fecha_creacion.errors.maxlength"
-                      class="msnError">invalido</strong>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">Fecha entrega</div>
-                <div class="col-8">
-                  <input type="text" class="form-control" [(ngModel)]="lote.fecha_entrega" [disabled]="mode==1"
-                    formControlName="fecha_entrega">
-                  <br>
-                  <div
-                    *ngIf="getTheFormGroup.fecha_entrega.errors &&(getTheFormGroup.fecha_entrega.dirty|| getTheFormGroup.fecha_entrega.touched)">
-                    <strong *ngIf="getTheFormGroup.fecha_entrega.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.fecha_entrega.errors.minlength||getTheFormGroup.fecha_entrega.errors.maxlength"
-                      class="msnError">invalido</strong>
-                  </div>
-                </div>
-              </div> 
-              <div class="row">
-                <div class="col-4">Dir lista orden ID</div>
-                <div class="col-8">
-                  <input type="text" class="form-control" [(ngModel)]="lote.dir_lista_orden_id" [disabled]="mode==1"
-                    formControlName="dir_lista_orden_id">
-                  <br>
-                  <div
-                    *ngIf="getTheFormGroup.dir_lista_orden_id.errors &&(getTheFormGroup.nombre.dirty|| getTheFormGroup.dir_lista_orden_id.touched)">
-                    <strong *ngIf="getTheFormGroup.dir_lista_orden_id.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.dir_lista_orden_id.errors.minlength||getTheFormGroup.dir_lista_orden_id.errors.maxlength"
-                      class="msnError">invalido</strong>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">Ruta ID</div>
-                <div class="col-8">
-                  <input type="text" class="form-control" [(ngModel)]="lote.ruta_id" [disabled]="mode==1"
-                    formControlName="ruta_id">
-                  <br>
-                  <div
-                    *ngIf="getTheFormGroup.ruta_id.errors &&(getTheFormGroup.ruta_id.dirty|| getTheFormGroup.ruta_id.touched)">
-                    <strong *ngIf="getTheFormGroup.ruta_id.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.ruta_id.errors.minlength||getTheFormGroup.ruta_id.errors.maxlength"
-                      class="msnError">invalido</strong>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <div class="row">
-              <div class="col-4"></div>
+          <form *ngIf="theFormGroup" [formGroup]="theFormGroup">
+            <div class="form-group row">
+              <label class="col-4 col-form-label">Cantidad de productos</label>
               <div class="col-8">
-                <button *ngIf="mode==2" (click)="create()" type="button" class="btn btn-create btn-block">Crear</button>
-                <button *ngIf="mode==3" (click)="update()" type="button" class="btn btn-update btn-block">Actualizar</button>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="cantidad_productos"
+                  [disabled]="mode === 1"
+                />
               </div>
             </div>
-          </div>
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label">Peso total</label>
+              <div class="col-8">
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="peso_total"
+                  [disabled]="mode === 1"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label">Fecha de creación</label>
+              <div class="col-8">
+                <input
+                  type="date"
+                  class="form-control"
+                  formControlName="fecha_creacion"
+                  [disabled]="mode === 1"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label">Fecha de entrega</label>
+              <div class="col-8">
+                <input
+                  type="date"
+                  class="form-control"
+                  formControlName="fecha_entrega"
+                  [disabled]="mode === 1"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label">Dir lista orden ID</label>
+              <div class="col-8">
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="dir_lista_orden_id"
+                  [disabled]="mode === 1"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label">Ruta ID</label>
+              <div class="col-8">
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="ruta_id"
+                  [disabled]="mode === 1"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-8 offset-4">
+                <button
+                  *ngIf="mode === 2"
+                  type="button"
+                  class="btn btn-success"
+                  (click)="create()"
+                >
+                  Crear
+                </button>
+                <button
+                  *ngIf="mode === 3"
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="update()"
+                >
+                  Actualizar
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

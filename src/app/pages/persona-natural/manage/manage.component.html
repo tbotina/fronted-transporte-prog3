@@ -14,7 +14,7 @@
             <div class="row">
               <div class="col-4">ID:</div>
               <div class="col-8">
-                <input type="text" class="form-control" [(ngModel)]="personaNatural._id" disabled>
+                <input type="text" class="form-control" [(ngModel)]="personaNatural.id" disabled>
               </div>
             </div>
             <div class="row">
@@ -47,6 +47,18 @@
               <div class="col-4">Cliente ID:</div>
               <div class="col-8">
                 <input type="text" class="form-control" [(ngModel)]="personaNatural.cliente_id" [disabled]="mode == 1" formControlName="cliente_id">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">Empresa ID:</div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="personaNatural.empresa_id" [disabled]="mode == 1" formControlName="empresa_id">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">Seguridad ID:</div>
+              <div class="col-8">
+                <input type="text" class="form-control" [(ngModel)]="personaNatural.security_id" [disabled]="mode == 1" formControlName="security_id">
               </div>
             </div>
             <div class="row">

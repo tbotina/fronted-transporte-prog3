@@ -33,14 +33,8 @@ export const AdminLayoutRoutes: Routes = [
         path: "dirlistarorden", loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
     },
     {
-        path: "personanatural", loadChildren: () => import('src/app/pages/persona-natural/persona-natural.module').then(m => m.PersonaNaturalModule)
-    },
-    {
         path: "cliente", loadChildren: () => import('src/app/pages/cliente/cliente.module').then(m => m.ClienteModule)
     },
-
-
-
     {
         path: 'productos',
         children: [
@@ -85,5 +79,9 @@ export const AdminLayoutRoutes: Routes = [
     {
         path: 'duenos',
         loadChildren: () => import('src/app/pages/duenos/dueños.module').then(m => m.DuenosModule)
+    },
+    {
+        path: 'personasNaturales',
+        loadChildren: () => import('src/app/pages/persona-natural/persona-natural.module').then(m => m.PersonaNaturalModule)
     }
 ];

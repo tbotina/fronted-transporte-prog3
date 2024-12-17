@@ -11,10 +11,11 @@ import Swal from 'sweetalert2';
 })
 export class ListComponent implements OnInit {
 
-  personaNatural: PersonaNatural[];
+  personaNaturales: PersonaNatural[];
+  regexFecha = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00:00.000-[0-9:]{5}$');
 
   constructor(private service: PersonaNaturalService, private router: Router) {
-    this.personaNatural = [];
+    this.personaNaturales = [];
   }
 
   ngOnInit(): void {
@@ -23,12 +24,16 @@ export class ListComponent implements OnInit {
 
   list() {
     this.service.list().subscribe(data => {
-      this.personaNatural = data;
-      console.log(JSON.stringify(this.personaNatural));
+      this.personaNaturales = data;
+      this.personaNaturales.forEach(element => {
+        this.aplicarFuncionSiEsFecha(element);
+      }); 
+      console.log('Listado de personasNaturales:', this.personaNaturales);
+      console.log(JSON.stringify(this.personaNaturales));
     });
   }
 
-  deleteDepartment(_id: number): void { // Cambiar el tipo a number
+  deletePersonaNatural(id: number): void { // Cambiar el tipo a number
     Swal.fire({
       title: 'Eliminar PersonaNatural',
       text: '¿Está seguro que quiere eliminar este PersonaNatural?',
@@ -42,7 +47,7 @@ export class ListComponent implements OnInit {
       color: '#ffffff'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.delete(_id).subscribe(data => {
+        this.service.delete(id).subscribe(data => {
           Swal.fire({
             title: 'Eliminado!',
             text: 'El PersonaNatural ha sido eliminado correctamente.',
@@ -56,18 +61,42 @@ export class ListComponent implements OnInit {
       }
     });
 
-    console.log('Eliminar PersonaNatural con _id:', _id);
+    console.log('Eliminar PersonaNatural con id:', id);
   }
 
-  updateDepartment(_id: number): void { // Cambiar el tipo a number
-    this.router.navigate(["cliente/update/" + _id]);
+  updatePersonaNatural(id: number): void { // Cambiar el tipo a number
+    this.router.navigate(["personasNaturales/update/" + id]);
   }
 
-  createDepartment(): void {
-    this.router.navigate(["cliente/create"]);
+  createPersonaNatural(): void {
+    this.router.navigate(["personasNaturales/create"]);
   }
 
-  viewDepartment(_id: number): void { // Cambiar el tipo a number
-    this.router.navigate(["cliente/view/" + _id]);
+  viewPersonaNatural(id: number): void { // Cambiar el tipo a number
+    this.router.navigate(["personasNaturales/view/" + id]);
   }
+
+  // Función que recibe un objeto y aplica una función si la propiedad es una fecha
+
+  aplicarFuncionSiEsFecha(obj: any) {
+    for (let clave in obj) {
+        if (obj.hasOwnProperty(clave)) {
+            console.log(clave);
+            if (this.regexFecha.test(obj[clave])) {
+                console.log('Es una fecha');
+                // Aplica la función si la propiedad es un objeto Date
+                obj[clave] = this.formatDate(obj[clave]);
+            }
+        }
+    }
+  }
+
+  formatDate(date: Date | string): string {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = ('0' + (d.getMonth() + 1)).slice(-2); // Meses empiezan en 0
+    const day = ('0' + d.getDate()).slice(-2);
+    return `${day}-${month}-${year}`;
+  }
+
 }

@@ -1,14 +1,10 @@
 export class PersonaNatural {
 
-    _id?:number;
+    id?:number;
     nombre: string
-    fecha_nacimiento: Date
+    fecha_nacimiento?: string
     cedula: string
-        email?:string;
-        cliente_id: number
-    password?:string;
-    role?:string;
+    cliente_id: number
     security_id?: string;
     empresa_id?: number
 }
-

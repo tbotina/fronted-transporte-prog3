@@ -14,25 +14,25 @@ export class PersonaNaturalService {
   list(): Observable<PersonaNatural[]> {
     return this.http
       .get<{ data: PersonaNatural[] }>(
-        `${environment.url_ms_negocio}/PersonaNaturals`
+        `${environment.url_ms_negocio}/personasNaturales`
       )
       .pipe(map((response) => response.data));
   }
 
   view(id: number): Observable<PersonaNatural> {
-    return this.http.get<PersonaNatural>(`${environment.url_ms_negocio}/clientes/${id}`);
+    return this.http.get<PersonaNatural>(`${environment.url_ms_negocio}/personasNaturales/${id}`);
   }
 
   create(newPersonaNatural: PersonaNatural): Observable<PersonaNatural> {
-    return this.http.post<PersonaNatural>(`${environment.url_ms_negocio}/clientes`, newPersonaNatural);
+    return this.http.post<PersonaNatural>(`${environment.url_ms_negocio}/personasNaturales`, newPersonaNatural);
   }
 
   update(ThePersonaNatural: PersonaNatural): Observable<PersonaNatural> {
-    return this.http.put<PersonaNatural>(`${environment.url_ms_negocio}/clientes/${ThePersonaNatural._id}`, ThePersonaNatural);
+    return this.http.put<PersonaNatural>(`${environment.url_ms_negocio}/personasNaturales/${ThePersonaNatural.id}`, ThePersonaNatural);
   }
   
   delete(id: number) {
-    return this.http.delete<PersonaNatural>(`${environment.url_ms_negocio}/clientes/${id}`);
+    return this.http.delete<PersonaNatural>(`${environment.url_ms_negocio}/personasNaturales/${id}`);
   }
 }
 

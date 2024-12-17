@@ -30,4 +30,30 @@ export class LoteService {
   delete(id: number) {
     return this.http.delete<Lote>(`${environment.url_ms_negocio}/lotes/${id}`);
   }
+
+  
+    lotesRutas(id: number): Observable<Lote[]> {
+      return this.http
+        .get<{ data: Lote[] }>(
+          `${environment.url_ms_negocio}/lotes/${id}/rutas`
+        )
+        .pipe(map((response) => response.data));
+    }
+  
+    lotesDirlistaOrden(id: number): Observable<Lote[]> {
+      return this.http
+        .get<{ data: Lote[] }>(
+          `${environment.url_ms_negocio}/Lotes/${id}/dirlistar`
+        )
+        .pipe(map((response) => response.data));
+    }
+  
+    lotesProductos(id: number): Observable<Lote[]> {
+      return this.http
+        .get<{ data: Lote[] }>(
+          `${environment.url_ms_negocio}/Lotess/${id}/ptoductos`
+        )
+        .pipe(map((response) => response.data));
+    }
+
 }

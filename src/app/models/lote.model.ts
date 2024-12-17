@@ -1,5 +1,6 @@
 import { RutaModule } from "../pages/ruta/ruta.module";
 import { DirListaOrden } from "./dir-lista-orden.model";
+import { Producto } from "./producto.model";
 import { Ruta } from "./ruta.model";
 
 export class Lote {
@@ -12,4 +13,5 @@ export class Lote {
     dir_lista_orden?: DirListaOrden;
     ruta_id: number;
     ruta?: Ruta;
+    productos?:Producto
 }

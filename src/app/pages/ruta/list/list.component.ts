@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RutaService } from 'src/app/services/ruta.service';
+import { RutaService } from 'src/app/services/ruta/ruta.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ruta } from 'src/app/models/ruta.model';

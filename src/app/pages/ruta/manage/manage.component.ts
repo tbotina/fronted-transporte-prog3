@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { config } from 'process';
 import { Ruta } from 'src/app/models/ruta.model';
-import { RutaService } from 'src/app/services/ruta.service';
+import { RutaService } from 'src/app/services/ruta/ruta.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -69,6 +69,7 @@ export class ManageComponent implements OnInit {
       this.trySend = true;
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
+      
     }
 
     // Asignar valores del formulario a la ruta

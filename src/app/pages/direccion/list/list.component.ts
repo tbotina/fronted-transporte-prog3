@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Direccion } from 'src/app/models/direccion.module';
-import { DireccionService } from 'src/app/services/direccion.service';
+import { DireccionService } from 'src/app/services/direcciones/direccion.service';
 import { Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 

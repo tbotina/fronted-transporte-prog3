@@ -20,6 +20,12 @@ export class DirlistaordenService {
     );
   }
 
+  dirListaRuta(id: number): Observable<Dirlistaorden[]> {
+    return this.http.get<{ data: Dirlistaorden[] }>(
+      `${environment.url_ms_negocio}/dirlistaordenes/${id}/ruta`
+    ).pipe(map((response) => response.data));
+  }
+
   create(newServicio: Dirlistaorden): Observable<Dirlistaorden> {
 
     return this.http.post<Dirlistaorden>(

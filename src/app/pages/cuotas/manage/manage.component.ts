@@ -94,4 +94,8 @@ export class ManageComponent implements OnInit {
     });
   }
 
+  pay(){
+      this.router.navigate(["/pagos/cuota/", this.cuota.id]);
+  }
+
 }

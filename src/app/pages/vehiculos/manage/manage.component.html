@@ -71,7 +71,6 @@
                                 <div class="col-8">
                                     <input type="text" class="form-control" [(ngModel)]="vehiculo.tipo_vehiculo"
                                         [disabled]="mode==1" formControlName="tipo_vehiculo">
-
                                     <br>
                                     <div
                                         *ngIf="getTheFormGroup.tipo_vehiculo.errors && (getTheFormGroup.tipo_vehiculo.dirty || getTheFormGroup.tipo_vehiculo.touched)">
@@ -101,13 +100,18 @@
                                     <div *ngIf="listConductores !== undefined">
                                         <div class="overflow-auto border rounded p-2"
                                             style="max-height: 200px; max-width: 100%;">
-                                            <div *ngFor="let conductor of listConductores">
+                                            <div *ngFor="let conductor of listConductores" formControlName="conductores">
                                                 <input type="checkbox"
                                                     (change)="onCheckboxChangeConductor(conductor, $event)">
                                                 <label> Id: {{conductor.id}} - Nombre: {{ conductor.nombre }} - Cédula:
                                                     {{ conductor.cedula }}</label>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div
+                                    *ngIf="getTheFormGroup.conductores.errors || getTheFormGroup.conductores.hasError('nonEmptyArray')">
+                                        <strong *ngIf="getTheFormGroup.conductores.errors.required"
+                                            class="msnError">Requerido</strong>
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +139,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div>
+                                        <strong *ngIf="getTheFormGroup.duenos.errors.required || (getTheFormGroup?.hasError('nonEmptyArray'))"
+                                            class="msnError">Requerido</strong>
+                                    </div>
                                 </div>
                             </div>
 
@@ -153,6 +161,7 @@
                                                 </option>
                                             </select>
                                         </div>
+                                        
             
                                         <div class="container mt-5" *ngIf="listMunicipios !== undefined">
                                             <h2>Selecciona un Municipio</h2>
@@ -163,6 +172,8 @@
                                                 </option>
                                             </select>
                                         </div>
+
+                                        
                                     </div>
                                 </div>
                             </div>

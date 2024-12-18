@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cuota } from 'src/app/models/cuota.model';
+import { Factura } from 'src/app/models/factura.modelo';
 import { CuotaService } from 'src/app/services/cuota/cuota.service';
 import Swal from 'sweetalert2';
 
@@ -15,6 +16,7 @@ export class ManageComponent implements OnInit {
   cuota: Cuota;
   theFormGroup: FormGroup;
   trySend: boolean;
+
 
   constructor(private activateRoute: ActivatedRoute, private service: CuotaService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;

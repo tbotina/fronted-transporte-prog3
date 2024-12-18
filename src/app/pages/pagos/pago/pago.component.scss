@@ -1,0 +1,87 @@
+/* Estilo general */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Contenedor principal */
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+/* Títulos y etiquetas */
+.label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.label .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Sección de tarjeta */
+.add-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+/* División de campos */
+.split {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Botón */
+.checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+    .split {
+        flex-direction: column;
+    }
+
+    .input-field {
+        margin-bottom: 10px;
+    }
+}

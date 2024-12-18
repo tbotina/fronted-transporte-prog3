@@ -17,7 +17,7 @@ export class ManageComponent implements OnInit {
   theFormGroup: FormGroup;
   trySend: boolean;
 
-  regexFecha = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00:00.000-[0123456789:]{5}$');
+  regexFecha = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T00:[0-9]{2}:00.000-[0123456789:]{5}$');
 
   constructor(private activateRoute: ActivatedRoute, private service: ContratoService, private router: Router, private theFormBuilder: FormBuilder) {
     this.trySend = false;

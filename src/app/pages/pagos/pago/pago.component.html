@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="add-card page col-8 text-center">
+    <form class="form p-4" [formGroup]="theFormGroup">
+      <label for="value">
+        <span>Valor</span>
+        <input type="text" id="value" disabled [value]="pago.value" />
+      </label>
+      <label for="name" class="label">
+        <span class="title">Name</span>
+        <input class="input-field" type="text" id="name" placeholder="Enter name" formControlName="name" />
+      </label>
+      <label for="last_name" class="label">
+        <span class="title">Last name</span>
+        <input class="input-field" type="text" id="last_name" placeholder="Enter last name" formControlName="last_name" />
+      </label>
+      <label for="serialCardNumber" class="label">
+        <span class="title">Card Number</span>
+        <input id="serialCardNumber" class="input-field" type="text" placeholder="0000 0000 0000 0000" formControlName="card_number" />
+      </label>
+      <div class="split">
+        <label for="expYear" class="label">
+          <span class="title">Expiry year</span>
+          <input id="expYear" class="input-field" type="text" placeholder="YYYY" formControlName="exp_year" />
+        </label>
+        <label for="expMonth" class="label">
+          <span class="title">Expiry month</span>
+          <input id="expMonth" class="input-field" type="text" placeholder="MM" formControlName="exp_month" />
+        </label>
+        <label for="cvv" class="label">
+          <span class="title">CVV</span>
+          <input id="cvv" class="input-field" type="text" placeholder="CVV" formControlName="cvc" />
+        </label>
+      </div>
+      <input class="checkout-btn" type="button" value="Pagar" (click)="pagar()" />
+    </form>
+  </div>
+</div>

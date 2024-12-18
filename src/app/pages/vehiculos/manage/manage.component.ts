@@ -17,6 +17,8 @@ import { VehiculoDuenoService } from 'src/app/services/vehiculoDueno/vehiculo-du
 import { DepartamentosService } from 'src/app/services/departamentos.service';
 import { MunicipioService } from 'src/app/services/municipio/municipio.service';
 import Swal from 'sweetalert2';
+import { AtempService } from 'src/app/services/atemp/atemp.service';
+import { nonEmptyArrayValidator } from 'src/app/validators/validators';
 
 @Component({
   selector: 'app-manage',
@@ -42,17 +44,17 @@ export class ManageComponent implements OnInit {
     private vehiculoConductor: VehiculoConductorService,
     private vehiculoDueno: VehiculoDuenoService,
     private DepartamentosService: DepartamentosService,
-    private MunicipioService: MunicipioService
+    private MunicipioService: MunicipioService,
+    private theAtempService: AtempService,
   ) {
 
     this.trySend = false;
     this.mode = 1;
-    this.vehiculo = { id: 0, placa: "", municipio_id: 0, tipo_vehiculo: "", conductores: [], duenos: [], operaciones: [] };
+    this.vehiculo = { id: 0, placa: "", municipio_id: 0, tipo_vehiculo: "", conductores: [], duenos: [] };
   }
 
   ngOnInit(): void {
 
-    this.configFormGroup();
     const currentUrl = this.activateRoute.snapshot.url.join('/');
     if (currentUrl.includes('view')) {
       this.mode = 1;
@@ -70,15 +72,21 @@ export class ManageComponent implements OnInit {
 
     this.cargarRelaciones(); // Cargar las relaciones
 
+    this.configFormGroup();
+
   }
 
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
       placa: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(6)]],
       municipio_id: [true, [Validators.required]],
-      tipo_vehiculo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]]
+      tipo_vehiculo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      conductores: [[], [Validators.required, nonEmptyArrayValidator]],
+      duenos: [[], [Validators.required, nonEmptyArrayValidator]],
     });
   }
+
+  
 
   get getTheFormGroup() {
     return this.theFormGroup.controls;
@@ -98,6 +106,10 @@ export class ManageComponent implements OnInit {
 
   create() {
     if (this.theFormGroup.invalid) {
+
+      let response = this.theAtempService.setAtemp();
+      this.setNavbar(response);
+      
       this.trySend = true;
       Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error");
       return;
@@ -107,6 +119,11 @@ export class ManageComponent implements OnInit {
       this.relacionar(); // Relacionar
       this.atras(); // Go back
     });
+  }
+
+  setNavbar(response: any) {
+    console.log(response);
+    
   }
 
   volverVehiculo(): void {

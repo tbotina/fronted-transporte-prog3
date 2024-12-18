@@ -90,5 +90,9 @@ export const AdminLayoutRoutes: Routes = [
     {
         path: 'gastos',
         loadChildren: () => import('src/app/pages/gasto/gasto.module').then(m => m.GastoModule)
+    },
+    {
+        path: 'pagos',
+        loadChildren: () => import('src/app/pages/pagos/pagos.module').then(m => m.PagosModule)
     }
 ];

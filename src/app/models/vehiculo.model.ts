@@ -8,7 +8,7 @@ export class Vehiculo {
     tipo_vehiculo: string;
     municipio_id?: number;
     municipio?: string;
-    dueno?: Dueno;
-    conductor?: Conductor;
-    ruta?: Ruta;
+    duenos?: Dueno[];
+    conductores?: Conductor[];
+    rutas?: Ruta[];
 }

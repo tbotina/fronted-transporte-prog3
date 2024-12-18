@@ -85,6 +85,33 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                  <label class="form-label fw-bold">Conductores:</label>
+                                </div>
+                                <div class="col-8">
+                                  <!-- Mostrar un indicador de carga si los datos no están disponibles -->
+                                  <div *ngIf="vehiculo.conductores === undefined">
+                                    Cargando conductores...
+                                    <!-- O puedes usar un spinner, por ejemplo -->
+                                    <div class="spinner-border text-primary" role="status">
+                                      <span class="visually-hidden">Cargando...</span>
+                                    </div>
+                                  </div>
+                                  <div *ngIf="vehiculo.conductores !== undefined && listConductores !== undefined">
+                                    <div class="overflow-auto border rounded p-2" style="max-height: 200px; max-width: 100%;">
+                                      <div *ngFor="let conductor of listConductores">
+                                        <input 
+                                          type="checkbox" 
+                                          [checked]="isConductorSelected(conductor.id)" 
+                                          (change)="onCheckboxChange(conductor.id, $event)">
+                                        <label> Id: {{conductor.id}}  - Nombre: {{ conductor.nombre }} - Cédula: {{ conductor.cedula }}</label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
                         </form>
 
                         <div class="row">

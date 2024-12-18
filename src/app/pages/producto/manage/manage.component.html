@@ -48,15 +48,15 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-4">Ruta_id</div>
+                <div class="col-4">Lote_id</div>
                 <div class="col-8">
                   <input type="text" class="form-control" [(ngModel)]="producto.lote_id" [disabled]="mode==1"
                     formControlName="lote_id">
                   <br>
                   <div
-                    *ngIf="getTheFormGroup.nombre.errors &&(getTheFormGroup.nombre.dirty|| getTheFormGroup.nombre.touched)">
-                    <strong *ngIf="getTheFormGroup.nombre.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.nombre.errors.minlength||getTheFormGroup.nombre.errors.maxlength"
+                    *ngIf="getTheFormGroup.ruta_id.errors &&(getTheFormGroup.ruta_id.dirty|| getTheFormGroup.ruta_id.touched)">
+                    <strong *ngIf="getTheFormGroup.ruta_id.errors.required" class="msnError">Requerido</strong>
+                    <strong *ngIf="getTheFormGroup.ruta_id.errors.minlength||getTheFormGroup.ruta_id.errors.maxlength"
                       class="msnError">invalido</strong>
                   </div>
                 </div>

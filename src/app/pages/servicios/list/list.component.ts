@@ -30,8 +30,6 @@ export class ListComponent implements OnInit {
         this.serviciosRestaurantes(this.activateRoute.snapshot.params.id);
         break;
   
-    
-  
       case 'list':
         this.list();
         break;

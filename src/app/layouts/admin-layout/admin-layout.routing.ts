@@ -13,8 +13,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
-    {path:"administrador",
-        canActivate:[AuthGuard],
+    {path:"administrador", canActivate:[AuthGuard],
     loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
     },
     {
@@ -87,5 +86,9 @@ export const AdminLayoutRoutes: Routes = [
     {
         path: 'cuotas',
         loadChildren: () => import('src/app/pages/cuotas/cuotas.module').then(m => m.CuotasModule)
+    },
+    {
+        path: 'gastos',
+        loadChildren: () => import('src/app/pages/gasto/gasto.module').then(m => m.GastoModule)
     }
 ];

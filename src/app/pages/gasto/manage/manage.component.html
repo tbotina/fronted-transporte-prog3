@@ -1,0 +1,141 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-volver" (click)="volverGasto()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="card shadow">
+                <div class="card-header bg-transparent">
+                    <h3 *ngIf="mode === 1">visualizar</h3>
+                    <h3 *ngIf="mode === 2">crear</h3>
+                    <h3 *ngIf="mode === 3">actualizar</h3>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                Id:
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" [(ngModel)]="gasto.id" disabled>
+                            </div>
+                        </div>
+                        <form [formGroup]="theFormGroup">
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Cantidad
+                                </div>
+                                <div class="col-8">
+                                    <input type="number" class="form-control" [(ngModel)]="gasto.cantidad"
+                                        [disabled]="mode==1" formControlName="cantidad">
+
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.cantidad.errors && (getTheFormGroup.cantidad.dirty || getTheFormGroup.cantidad.touched)">
+                                        <strong *ngIf="getTheFormGroup.cantidad.errors.required" class="msnError">Requerido</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Dueño ID
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="gasto.dueno_id"
+                                        [disabled]="mode==1" formControlName="dueno_id">
+
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.dueno_id.errors && (getTheFormGroup.dueno_id.dirty || getTheFormGroup.dueno_id.touched)">
+                                        <strong *ngIf="getTheFormGroup.dueno_id.errors.required" class="msnError">Requerido</strong>
+                                        <strong
+                                            *ngIf="getTheFormGroup.dueno_id.errors.minlength || getTheFormGroup.dueno_id.errors.maxlength"
+                                            class="msnError">Invalido</strong>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Conductor ID
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="gasto.conductor_id"
+                                        [disabled]="mode==1" formControlName="conductor_id">
+                            
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.conductor_id.errors && (getTheFormGroup.conductor_id.dirty || getTheFormGroup.conductor_id.touched)">
+                                        <strong *ngIf="getTheFormGroup.conductor_id.errors.required" class="msnError">Requerido</strong>
+                                        <strong
+                                            *ngIf="getTheFormGroup.conductor_id.errors.minlength || getTheFormGroup.conductor_id.errors.maxlength"
+                                            class="msnError">Invalido</strong>
+                            
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Servicio ID
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="gasto.servicio_id"
+                                        [disabled]="mode==1" formControlName="servicio_id">
+                            
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.servicio_id.errors && (getTheFormGroup.servicio_id.dirty || getTheFormGroup.servicio_id.touched)">
+                                        <strong *ngIf="getTheFormGroup.servicio_id.errors.required" class="msnError">Requerido</strong>
+                                        <strong
+                                            *ngIf="getTheFormGroup.servicio_id.errors.minlength || getTheFormGroup.servicio_id.errors.maxlength"
+                                            class="msnError">Invalido</strong>
+                            
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    Facturar ID
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" [(ngModel)]="gasto.factura_id"
+                                        [disabled]="mode==1" formControlName="factura_id">
+                            
+                                    <br>
+                                    <div
+                                        *ngIf="getTheFormGroup.factura_id.errors && (getTheFormGroup.factura_id.dirty || getTheFormGroup.factura_id.touched)">
+                                        <strong *ngIf="getTheFormGroup.factura_id.errors.required" class="msnError">Requerido</strong>
+                                        <strong
+                                            *ngIf="getTheFormGroup.factura_id.errors.minlength || getTheFormGroup.factura_id.errors.maxlength"
+                                            class="msnError">Invalido</strong>
+                            
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-8">
+                                <button *ngIf="mode==2" (click)="create()" type="button"
+                                    class="btn btn-create btn-block">CREAR</button>
+                                <button *ngIf="mode==3" (click)="update()" type="button"
+                                    class="btn btn-update btn-block">ACTUALIZAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

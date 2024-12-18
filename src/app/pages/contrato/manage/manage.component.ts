@@ -71,15 +71,16 @@ export class ManageComponent implements OnInit {
     }
     this.service.create(this.contrato).subscribe(data => {
       Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success");
-      this.router.navigate(["contrato/list"]);
+      this.router.navigate(["contratos/list"]);
     });
   }
-  
+
   volverContrato(): void {
     this.router.navigate(["contratos/list"])
   }
 
   update() {
+    console.log("Actualizando contrato", this.contrato);
     if (this.theFormGroup.invalid) {
       this.trySend = true;
       console.log(this.contrato);
@@ -88,22 +89,22 @@ export class ManageComponent implements OnInit {
     }
     this.service.update(this.contrato).subscribe(data => {
       Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success");
-      this.router.navigate(["contrato/list"]);
+      this.router.navigate(["contratos/list"]);
     });
   }
 
-    // Función que recibe un objeto y aplica una función si la propiedad es una fecha
+  // Función que recibe un objeto y aplica una función si la propiedad es una fecha
 
   aplicarFuncionSiEsFecha(obj: any) {
     for (let clave in obj) {
-        if (obj.hasOwnProperty(clave)) {
-            console.log(clave);
-            if (this.regexFecha.test(obj[clave])) {
-                console.log('Es una fecha');
-                // Aplica la función si la propiedad es un objeto Date
-                obj[clave] = this.formatDate(obj[clave]);
-            }
+      if (obj.hasOwnProperty(clave)) {
+        console.log(clave);
+        if (this.regexFecha.test(obj[clave])) {
+          console.log('Es una fecha');
+          // Aplica la función si la propiedad es un objeto Date
+          obj[clave] = this.formatDate(obj[clave]);
         }
+      }
     }
   }
 
@@ -114,5 +115,5 @@ export class ManageComponent implements OnInit {
     const day = ('0' + d.getDate()).slice(-2);
     return `${day}-${month}-${year}`;
   }
-  
+
 }

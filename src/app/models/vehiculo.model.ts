@@ -10,5 +10,5 @@ export class Vehiculo {
     municipio?: string;
     duenos?: Dueno[];
     conductores?: Conductor[];
-    rutas?: Ruta[];
+    operaciones?: Ruta[];
 }

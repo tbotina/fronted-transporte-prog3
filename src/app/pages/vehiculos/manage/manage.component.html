@@ -85,32 +85,57 @@
                                 </div>
                             </div>
 
+                            <!-- Listar conductores -->
+
                             <div class="row mb-3">
                                 <div class="col-4">
-                                  <label class="form-label fw-bold">Conductores:</label>
+                                    <label class="form-label fw-bold">Conductores:</label>
                                 </div>
                                 <div class="col-8">
-                                  <!-- Mostrar un indicador de carga si los datos no están disponibles -->
-                                  <div *ngIf="vehiculo.conductores === undefined">
-                                    Cargando conductores...
-                                    <!-- O puedes usar un spinner, por ejemplo -->
-                                    <div class="spinner-border text-primary" role="status">
-                                      <span class="visually-hidden">Cargando...</span>
+                                    <!-- Mostrar un indicador de carga si los datos no están disponibles -->
+                                    <div *ngIf="listConductores === undefined">
+                                        <div class="spinner-grow" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div *ngIf="vehiculo.conductores !== undefined && listConductores !== undefined">
-                                    <div class="overflow-auto border rounded p-2" style="max-height: 200px; max-width: 100%;">
-                                      <div *ngFor="let conductor of listConductores">
-                                        <input 
-                                          type="checkbox" 
-                                          [checked]="isConductorSelected(conductor.id)" 
-                                          (change)="onCheckboxChange(conductor.id, $event)">
-                                        <label> Id: {{conductor.id}}  - Nombre: {{ conductor.nombre }} - Cédula: {{ conductor.cedula }}</label>
-                                      </div>
+                                    <div *ngIf="listConductores !== undefined">
+                                        <div class="overflow-auto border rounded p-2"
+                                            style="max-height: 200px; max-width: 100%;">
+                                            <div *ngFor="let conductor of listConductores">
+                                                <input type="checkbox" (change)="onCheckboxChangeConductor(conductor, $event)">
+                                                <label> Id: {{conductor.id}} - Nombre: {{ conductor.nombre }} - Cédula:
+                                                    {{ conductor.cedula }}</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
-                              </div>
+                            </div>
+
+                            <!-- Listar duenos -->
+
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                    <label class="form-label fw-bold">Duenos:</label>
+                                </div>
+                                <div class="col-8">
+                                    <!-- Mostrar un indicador de carga si los datos no están disponibles -->
+                                    <div *ngIf="listDuenos === undefined">
+                                        <div class="spinner-grow" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="listDuenos !== undefined">
+                                        <div class="overflow-auto border rounded p-2"
+                                            style="max-height: 200px; max-width: 100%;">
+                                            <div *ngFor="let dueno of listDuenos">
+                                                <input type="checkbox" (change)="onCheckboxChangeDueno(dueno, $event)">
+                                                <label> Id: {{dueno.id}} - Nombre: {{ dueno.nombre }} - Cédula:
+                                                    {{ dueno.cedula }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </form>
 

@@ -42,6 +42,14 @@ export class VehiculoService {
       .pipe(map((response) => response.data));
   }
 
+  vehiculosOperaciones(id: number): Observable<Vehiculo[]> {
+    return this.http
+      .get<{ data: Vehiculo[] }>(
+        `${environment.url_ms_negocio}/vehiculos/${id}/operaciones`
+      )
+      .pipe(map((response) => response.data));
+  }
+
   view(id: number): Observable<Vehiculo> {
     return this.http.get<Vehiculo>(
       `${environment.url_ms_negocio}/vehiculos/${id}`

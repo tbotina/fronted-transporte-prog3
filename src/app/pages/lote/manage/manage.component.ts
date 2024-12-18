@@ -43,8 +43,8 @@ export class ManageComponent implements OnInit {
       peso_total: [null, [Validators.required, Validators.min(0.1)]],
       fecha_creacion: [null, [Validators.required]],
       fecha_entrega: [null, [Validators.required]],
-      dir_lista_orden_id: [null],
-      ruta_id: [null],
+      dir_lista_orden_id: [null, [Validators.required]],
+      ruta_id: [null, [Validators.required]],
     });
   }
 
@@ -62,6 +62,8 @@ export class ManageComponent implements OnInit {
   loadLote(id: number) {
     this.service.view(id).subscribe({
       next: (data) => {
+        console.log(data);
+
         this.lote = {
           ...data,
           fecha_creacion: new Date(data.fecha_creacion),
@@ -78,9 +80,17 @@ export class ManageComponent implements OnInit {
       Swal.fire('Error', 'Complete todos los campos correctamente', 'error');
       return;
     }
-    this.service.create(this.theFormGroup.value).subscribe(() => {
-      Swal.fire('Éxito', 'Lote creado correctamente', 'success');
-      this.router.navigate(['/lotes/list']);
+    console.log(this.theFormGroup.invalid)
+  
+    this.service.create(this.theFormGroup.value).subscribe({
+      next: () => {
+        Swal.fire('Éxito', 'Lote creado correctamente', 'success');
+        this.router.navigate(['/lotes/list']);
+      },
+      error: (error) => {
+        Swal.fire('Error', 'No se pudo crear el lote', 'error');
+        console.error('Error al crear el lote:', error);
+      }
     });
   }
 
@@ -89,12 +99,16 @@ export class ManageComponent implements OnInit {
       Swal.fire('Error', 'Complete todos los campos correctamente', 'error');
       return;
     }
-    this.service.update({ ...this.lote, ...this.theFormGroup.value }).subscribe(
-      () => {
+    this.service.update({ ...this.lote, ...this.theFormGroup.value }).subscribe({
+      next: () => {
         Swal.fire('Éxito', 'Lote actualizado correctamente', 'success');
         this.router.navigate(['/lotes/list']);
+      },
+      error: (error) => {
+        Swal.fire('Error', 'No se pudo actualizar el lote', 'error');
+        console.error('Error al actualizar el lote:', error);
       }
-    );
+    });
   }
 
   volverLote() {

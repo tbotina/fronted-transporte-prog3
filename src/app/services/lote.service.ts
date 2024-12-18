@@ -20,6 +20,7 @@ export class LoteService {
   }
 
   create(newLote: Lote): Observable<Lote> {
+    console.log(newLote);
     return this.http.post<Lote>(`${environment.url_ms_negocio}/lotes`, newLote);
   }
 

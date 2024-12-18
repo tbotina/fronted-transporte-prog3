@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class ListComponent implements OnInit {
 
+  regexFecha = new RegExp('[0-9]{4}-[0-9]{2}-[0-9]{2}T00:[0-9]{2}:00.000-[0123456789:]{5}$');
+
   lotes: Lote[]
   constructor(private service:LoteService, 
     private router: Router,
@@ -44,8 +46,11 @@ export class ListComponent implements OnInit {
   list(){
     this.service.list().subscribe((data) => {
       this.lotes = data;
+      this.lotes.forEach((lote) => {
+        this.aplicarFuncionSiEsFecha(lote); // Aplica la función si la propiedad es un objeto Date
       }
-    );
+      );
+    });
   }
 
   lotesRutas(id:number){
@@ -107,5 +112,28 @@ export class ListComponent implements OnInit {
       }
     });
     console.log('Eliminar lote con id:', id);
+  }
+
+  // Función que recibe un objeto y aplica una función si la propiedad es una fecha
+
+  aplicarFuncionSiEsFecha(obj: any) {
+    for (let clave in obj) {
+        if (obj.hasOwnProperty(clave)) {
+            console.log(clave);
+            if (this.regexFecha.test(obj[clave])) {
+                console.log('Es una fecha');
+                // Aplica la función si la propiedad es un objeto Date
+                obj[clave] = this.formatDate(obj[clave]);
+            }
+        }
+    }
+  }
+
+  formatDate(date: Date | string): string {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = ('0' + (d.getMonth() + 1)).slice(-2); // Meses empiezan en 0
+    const day = ('0' + d.getDate()).slice(-2);
+    return `${day}-${month}-${year}`;
   }
 }

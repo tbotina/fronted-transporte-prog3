@@ -5,6 +5,6 @@ export class Servicios {
     id?:number
     descripcion:string
     estado_servicio:boolean
-    hotel:Hotel
-    restaurante:Restaurante
+    hotel?:Hotel
+    restaurante?:Restaurante
 }

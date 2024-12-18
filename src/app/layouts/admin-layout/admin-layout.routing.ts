@@ -17,25 +17,25 @@ export const AdminLayoutRoutes: Routes = [
     loadChildren: () => import('src/app/pages/administrador/administrador.module').then(m => m.AdministradorModule)
     },
     {
-        path: "departamentos",
+        path: "departamentos",canActivate:[AuthGuard],
         loadChildren: () => import('src/app/pages/departamentos/departamentos.module').then(m => m.DepartamentosModule)
     },
     {
-        path: "servicios",
+        path: "servicios",canActivate:[AuthGuard],
         loadChildren: () => import('src/app/pages/servicios/servicios.module').then(m => m.ServiciosModule)
     },
     {
 
-        path: "direccion", loadChildren: () => import('src/app/pages/direccion/direccion.module').then(m => m.DireccionModule)
+        path: "direccion",canActivate:[AuthGuard], loadChildren: () => import('src/app/pages/direccion/direccion.module').then(m => m.DireccionModule)
     },
     {
-        path: "dirlistarorden", loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
+        path: "dirlistarorden",canActivate:[AuthGuard], loadChildren: () => import('src/app/pages/dirlistaorden/dirlistaorden.module').then(m => m.DirlistaordenModule)
     },
     {
-        path: "cliente", loadChildren: () => import('src/app/pages/cliente/cliente.module').then(m => m.ClienteModule)
+        path: "cliente",canActivate:[AuthGuard], loadChildren: () => import('src/app/pages/cliente/cliente.module').then(m => m.ClienteModule)
     },
     {
-        path: 'productos',
+        path: 'productos',canActivate:[AuthGuard],
         children: [
             {
                 path: '',
@@ -45,7 +45,7 @@ export const AdminLayoutRoutes: Routes = [
         ]
     },
     {
-        path: 'lotes',
+        path: 'lotes',canActivate:[AuthGuard],
         children: [
             {
                 path: '',
@@ -54,7 +54,7 @@ export const AdminLayoutRoutes: Routes = [
         ]
     },
     {
-        path: 'dirlistaordenes',
+        path: 'dirlistaordenes',canActivate:[AuthGuard],
         children: [
             {
                 path: '',
@@ -63,7 +63,7 @@ export const AdminLayoutRoutes: Routes = [
         ]
     },
     {
-        path: 'rutas',
+        path: 'rutas',canActivate:[AuthGuard],
         children: [
             {
                 path: '',
@@ -72,23 +72,23 @@ export const AdminLayoutRoutes: Routes = [
         ]
     },
     {
-        path: 'vehiculos',
+        path: 'vehiculos',canActivate:[AuthGuard],
         loadChildren: () => import('src/app/pages/vehiculos/vehiculos.module').then(m => m.VehiculosModule)
     },
     {
-        path: 'duenos',
+        path: 'duenos',canActivate:[AuthGuard],
         loadChildren: () => import('src/app/pages/duenos/dueños.module').then(m => m.DuenosModule)
     },
     {
-        path: 'personasNaturales',
+        path: 'personasNaturales',canActivate:[AuthGuard],
         loadChildren: () => import('src/app/pages/persona-natural/persona-natural.module').then(m => m.PersonaNaturalModule)
     },
     {
-        path: 'cuotas',
+        path: 'cuotas',canActivate:[AuthGuard],
         loadChildren: () => import('src/app/pages/cuotas/cuotas.module').then(m => m.CuotasModule)
     },
     {
-        path: 'gastos',
+        path: 'gastos',canActivate:[AuthGuard],
         loadChildren: () => import('src/app/pages/gasto/gasto.module').then(m => m.GastoModule)
     }
 ];

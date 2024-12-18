@@ -17,7 +17,20 @@ export const ROUTES: RouteInfo[] = [
     { path: '/user-profile', title: 'perfil',  icon:'ni-single-02 text-red', class: '1' },
     { path: '/tables', title: 'utilidades',  icon:'ni-sound-wave text-red', class: '2' },
     { path: '/login', title: 'Login',  icon:'ni-key-25 text-red', class: '0' },
-    { path: '/register', title: 'Register',  icon:'ni-circle-08 text-red', class: '0' }
+    { path: '/register', title: 'Register',  icon:'ni-circle-08 text-red', class: '0' },
+    { path: '/servicios/list', title: 'servicios', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/administrador/list', title: 'administrador', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/cliente/list', title: 'cliente', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/personanatural/list', title: 'personanatural', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/direccion/list', title: 'direccion', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/dirlistaordenes/list', title: 'dirlistarorden', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/lotes/list', title: 'lotes', icon:'ni-sound-wave text-red', class: '1' },
+    { path: '/rutas/list', title: 'rutas', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/vehiculos/list', title: 'vehiculos', icon:'ni-sound-wave text-red', class: '1' },
+    { path: '/duenos/list', title: 'duenos', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/personasNaturales/list', title: 'personasNaturales', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/cuotas/list', title: 'cuotas', icon:'ni-single-02 text-red', class: '1' },
+    { path: '/gastos/list', title: 'gastos', icon:'ni-sound-wave text-red', class: '1' },
 ];
 
 @Component({

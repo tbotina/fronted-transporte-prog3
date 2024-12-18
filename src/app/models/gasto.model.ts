@@ -5,7 +5,7 @@ import { Servicios } from "./servicios.model";
 export class Gasto {
     id?: number;
     cantidad: number;
-    dueño_id: number;
+    dueno_id: number;
     dueno?: Dueno;
     conductor_id: number;
     conductor?: Conductor;

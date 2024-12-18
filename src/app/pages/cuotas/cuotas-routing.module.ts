@@ -7,8 +7,7 @@ const routes: Routes = [
   {path: 'list', component: ListComponent},
   {path: 'create', component: ManageComponent},
   {path: 'update/:id', component: ManageComponent},
-  {path: 'view/:id', component: ManageComponent},
-  {path: 'list/:id/contratos', component: ListComponent} //Lista las cuotas de un contrato
+  {path: 'view/:id', component: ManageComponent}
 ];
 
 @NgModule({

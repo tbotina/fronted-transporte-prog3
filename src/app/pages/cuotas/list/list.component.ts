@@ -19,7 +19,7 @@ export class ListComponent implements OnInit {
     this.list();
   }
 
-  list(){
+  list() {
     this.service.list().subscribe((data) => {
       this.cuotas = data;
       }
@@ -29,6 +29,16 @@ export class ListComponent implements OnInit {
   createCuota(){
     this.router.navigate(["/cuotas/create"]);
     console.log('Crear una nueva cuota');
+  }
+
+  viewCuota(id: number){
+    this.router.navigate(["/cuotas/view/", id]);
+    console.log('Ver cuota: ', id);
+  }
+
+  updateCuota(id: number){
+    this.router.navigate(["/cuotas/update/", id]);
+    console.log('Actualizar cuota: ', id);
   }
 
 }

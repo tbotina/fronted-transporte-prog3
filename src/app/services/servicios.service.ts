@@ -36,4 +36,19 @@ export class ServiciosService {
       `${environment.url_ms_negocio}/servicios/${id}`
     );
   }
+  serviciosHoteles(id: number): Observable<Servicios[]> {
+          return this.http
+            .get<{ data: Servicios[] }>(
+              `${environment.url_ms_negocio}/servicios/${id}/hoteles`
+            )
+            .pipe(map((response) => response.data));
+        }
+      
+        serviciosRestaurantes(id: number): Observable<Servicios[]> {
+          return this.http
+            .get<{ data: Servicios[] }>(
+              `${environment.url_ms_negocio}/servicios/${id}/restaurantes`
+            )
+            .pipe(map((response) => response.data));
+        }
 }

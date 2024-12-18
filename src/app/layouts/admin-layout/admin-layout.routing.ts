@@ -22,7 +22,7 @@ export const AdminLayoutRoutes: Routes = [
         loadChildren: () => import('src/app/pages/departamentos/departamentos.module').then(m => m.DepartamentosModule)
     },
     {
-        path: "servicios",canActivate:[AuthGuard],
+        path: "servicios",
         loadChildren: () => import('src/app/pages/servicios/servicios.module').then(m => m.ServiciosModule)
     },
     {

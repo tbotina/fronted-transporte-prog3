@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
 import Swal from 'sweetalert2';
@@ -12,20 +12,52 @@ import Swal from 'sweetalert2';
 export class ListComponent implements OnInit {
   productos: Producto[]
 
-  constructor(private service: ProductoService, private router: Router) {
+  constructor(private service: ProductoService, 
+    private router: Router,
+     private activateRoute: ActivatedRoute  
+
+    
+  ) {
     this.productos = []
   }
 
-  ngOnInit(): void {
-    this.list();
+  ngOnInit(): void {  
+    switch (this.activateRoute.routeConfig?.path){
+  
+      case 'list/:id/lote':
+        this.productosLote(this.activateRoute.snapshot.params.id);
+        break;
+  
+      case 'list/:id/cliente':
+        this.productosCliente(this.activateRoute.snapshot.params.id);
+        break;
+  
+    
+  
+      case 'list':
+        this.list();
+        break;
+    }
   }
-
   list() {
     this.service.list().subscribe((data) => {
       console.log(data);
       this.productos = data;
     });
   }
+  productosLote(id:number){
+    this.service.productosLote(id).subscribe((data) => {
+      this.productos = data;
+    });
+  }
+
+  productosCliente(id:number){ 
+    this.service.productosCliente(id).subscribe((data) => {
+      console.log(data)
+      this.productos = data;
+    });
+  }
+
 
   createProduct(): void {
     this.router.navigate(["productos/create"])

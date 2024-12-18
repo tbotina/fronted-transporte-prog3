@@ -20,6 +20,7 @@ export class LoteService {
   }
 
   create(newLote: Lote): Observable<Lote> {
+    console.log(newLote);
     return this.http.post<Lote>(`${environment.url_ms_negocio}/lotes`, newLote);
   }
 
@@ -32,7 +33,7 @@ export class LoteService {
   }
 
   
-    lotesRutas(id: number): Observable<Lote[]> {
+ lotesRutas(id: number): Observable<Lote[]> {
       return this.http
         .get<{ data: Lote[] }>(
           `${environment.url_ms_negocio}/lotes/${id}/rutas`
@@ -40,7 +41,7 @@ export class LoteService {
         .pipe(map((response) => response.data));
     }
   
-    lotesDirlistaOrden(id: number): Observable<Lote[]> {
+lotesDirlistaOrden(id: number): Observable<Lote[]> {
       return this.http
         .get<{ data: Lote[] }>(
           `${environment.url_ms_negocio}/Lotes/${id}/dirlistar`
@@ -48,7 +49,7 @@ export class LoteService {
         .pipe(map((response) => response.data));
     }
   
-    lotesProductos(id: number): Observable<Lote[]> {
+lotesProductos(id: number): Observable<Lote[]> {
       return this.http
         .get<{ data: Lote[] }>(
           `${environment.url_ms_negocio}/Lotess/${id}/ptoductos`

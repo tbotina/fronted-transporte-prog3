@@ -33,4 +33,19 @@ export class ProductoService {
   delete(id: number) {
     return this.http.delete<Producto>(`${environment.url_ms_negocio}/productos/${id}`);
   }
+  productosLote(id: number): Observable<Producto[]> {
+        return this.http
+          .get<{ data: Producto[] }>(
+            `${environment.url_ms_negocio}/productos/${id}/lote`
+          )
+          .pipe(map((response) => response.data));
+      }
+    
+      productosCliente(id: number): Observable<Producto[]> {
+        return this.http
+          .get<{ data: Producto[] }>(
+            `${environment.url_ms_negocio}/productos/${id}/cliente`
+          )
+          .pipe(map((response) => response.data));
+      }
 }

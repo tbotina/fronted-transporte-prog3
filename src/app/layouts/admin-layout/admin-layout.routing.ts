@@ -83,5 +83,9 @@ export const AdminLayoutRoutes: Routes = [
     {
         path: 'personasNaturales',
         loadChildren: () => import('src/app/pages/persona-natural/persona-natural.module').then(m => m.PersonaNaturalModule)
+    },
+    {
+        path: 'cuotas',
+        loadChildren: () => import('src/app/pages/cuotas/cuotas.module').then(m => m.CuotasModule)
     }
 ];

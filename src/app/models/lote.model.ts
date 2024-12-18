@@ -1,4 +1,3 @@
-import { RutaModule } from "../pages/ruta/ruta.module";
 import { DirListaOrden } from "./dir-lista-orden.model";
 import { Producto } from "./producto.model";
 import { Ruta } from "./ruta.model";

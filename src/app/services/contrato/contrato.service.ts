@@ -9,6 +9,7 @@ import { Contrato } from "src/app/models/contrato.model";
 })
 export class ContratoService {
   constructor(private http: HttpClient) {}
+  
   list(): Observable<Contrato[]> {
     return this.http
       .get<{ data: Contrato[] }>(

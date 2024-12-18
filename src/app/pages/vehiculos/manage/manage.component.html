@@ -102,7 +102,8 @@
                                         <div class="overflow-auto border rounded p-2"
                                             style="max-height: 200px; max-width: 100%;">
                                             <div *ngFor="let conductor of listConductores">
-                                                <input type="checkbox" (change)="onCheckboxChangeConductor(conductor, $event)">
+                                                <input type="checkbox"
+                                                    (change)="onCheckboxChangeConductor(conductor, $event)">
                                                 <label> Id: {{conductor.id}} - Nombre: {{ conductor.nombre }} - Cédula:
                                                     {{ conductor.cedula }}</label>
                                             </div>
@@ -136,6 +137,36 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label class="form-label fw-bold">Municipio:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="container mt-5">
+                                            <h2>Selecciona un Departamento</h2>
+                                            <select class="form-select" (change)="onDepartamentoChange($event.target.value)">
+                                                <option value="" disabled selected>-- Selecciona una opción --</option>
+                                                <option *ngFor="let departamento of listDepartamentos" [value]="departamento.id">
+                                                    {{ departamento.nombre }}
+                                                </option>
+                                            </select>
+                                        </div>
+            
+                                        <div class="container mt-5" *ngIf="listMunicipios !== undefined">
+                                            <h2>Selecciona un Municipio</h2>
+                                            <select class="form-select" (change)="onMunicipioChange($event.target.value)">
+                                                <option value="" disabled selected>-- Selecciona un Municipio --</option>
+                                                <option *ngFor="let municipio of listMunicipios" [value]="municipio.id">
+                                                    {{ municipio.nombre }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                         </form>
 

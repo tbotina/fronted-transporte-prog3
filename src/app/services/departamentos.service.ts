@@ -11,7 +11,7 @@ export class DepartamentosService {
 
   constructor(private http: HttpClient) {   }
   list(): Observable<Departamentos[]> {
-    return this.http.get<{ data: Departamentos[] }>(`http://127.0.0.1:3333/departamentos`) .pipe(
+    return this.http.get<{ data: Departamentos[] }>(`${environment.url_ms_negocio}/departamentos`) .pipe(
     map(response => response.data)
   );
   }

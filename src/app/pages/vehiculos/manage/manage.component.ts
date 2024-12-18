@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Conductor } from 'src/app/models/conductor.model';
+import { Departamentos } from 'src/app/models/departamentos.module';
 import { Dueno } from 'src/app/models/dueno.model';
+import { Municipio } from 'src/app/models/municipio.modelo';
+import { Operacion } from 'src/app/models/operacion.modelo';
 import { Ruta } from 'src/app/models/ruta.model';
 import { Vehiculo } from 'src/app/models/vehiculo.model';
 import { ConductorService } from 'src/app/services/conductor/conductor.service';
@@ -11,6 +14,8 @@ import { RutaService } from 'src/app/services/ruta/ruta.service';
 import { VehiculoService } from 'src/app/services/vehiculo/vehiculo.service';
 import { VehiculoConductorService } from 'src/app/services/vehiculoConductor/vehiculo-conductor.service';
 import { VehiculoDuenoService } from 'src/app/services/vehiculoDueno/vehiculo-dueno.service';
+import { DepartamentosService } from 'src/app/services/departamentos.service';
+import { MunicipioService } from 'src/app/services/municipio/municipio.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -36,6 +41,8 @@ export class ManageComponent implements OnInit {
     private RutasService: RutaService,
     private vehiculoConductor: VehiculoConductorService,
     private vehiculoDueno: VehiculoDuenoService,
+    private DepartamentosService: DepartamentosService,
+    private MunicipioService: MunicipioService
   ) {
 
     this.trySend = false;
@@ -126,11 +133,15 @@ export class ManageComponent implements OnInit {
 
   listConductores: Conductor[]; // la lista de conductores
   listDuenos: Dueno[]; // la lista de duenos
-  listRutas: Ruta[]; // la lista de operaciones
+  listDepartamentos: Departamentos[]; // la lista de departamentos
+  listMunicipios: Municipio[] = []; // la lista de municipios
+
 
   cargarRelaciones() { // Cargar las relaciones
     this.getConductores();
     this.getDuenos();
+    this.getDepartamentos();
+    this.getMunicipios(1);
     // this.conductoresVehiculos(this.vehiculo.id);
     // this.duenosVehiculos(this.vehiculo.id);
   }
@@ -144,6 +155,18 @@ export class ManageComponent implements OnInit {
   getDuenos() {
     this.DuenosService.list().subscribe(data => {
       this.listDuenos = data;
+    });
+  }
+
+  getDepartamentos() {
+    this.DepartamentosService.list().subscribe(data => {
+      this.listDepartamentos = data;
+    });
+  }
+
+  getMunicipios(id: number) {
+    this.MunicipioService.list(id).subscribe(data => {
+      this.listMunicipios = data;
     });
   }
 
@@ -176,6 +199,16 @@ export class ManageComponent implements OnInit {
       this.vehiculo.duenos = this.vehiculo.duenos.filter(duenoId => duenoId !== dueno); // Eliminar ID
     }
 
+  }
+
+  // Gestión de municipios
+
+  async onDepartamentoChange(id:number) {
+    this.getMunicipios(id);
+  }
+
+  onMunicipioChange(id:number) {
+    this.vehiculo.municipio_id = id;
   }
 
 

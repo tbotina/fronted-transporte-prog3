@@ -1,117 +1,98 @@
 import { Component, OnInit } from '@angular/core';
-import { LoteService } from 'src/app/services/lote.service';
-import { Lote } from 'src/app/models/lote.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Lote } from 'src/app/models/lote.model';
+import { LoteService } from 'src/app/services/lote.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: 'app-manage',
+  templateUrl: './manage.component.html',
+  styleUrls: ['./manage.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ManageComponent implements OnInit {
+  mode: number; // 1: view, 2: create, 3: update
+  lote: Lote;
+  theFormGroup: FormGroup;
+  trySend: boolean;
 
-  regexFecha = new RegExp('[0-9]{4}-[0-9]{2}-[0-9]{2}T00:[0-9]{2}:00.000-[0123456789:]{5}$');
+  regexFecha = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}T00:[0-9]{2}:00.000-[0123456789:]{5}$');
 
-  lotes: Lote[]
-  constructor(private service:LoteService, 
-    private router: Router,
-     private activateRoute: ActivatedRoute  
-  ){ 
-    this.lotes = []
+  constructor(private activateRoute: ActivatedRoute, private service: LoteService, private router: Router, private theFormBuilder: FormBuilder) {
+    this.trySend = false;
+    this.mode = 1;
+    this.lote = { id: 0, cantidad_productos: 0, peso_total: 0, fecha_creacion: undefined, fecha_entrega: undefined, dir_lista_orden_id: 0, ruta_id: 0 };
   }
 
-  ngOnInit(): void {  
-  switch (this.activateRoute.routeConfig?.path){
-
-    case 'list/:id/rutas':
-      this.lotesRutas(this.activateRoute.snapshot.params.id);
-      break;
-
-    case 'list/:id/listarorden':
-      this.lotesDirlistaOrden(this.activateRoute.snapshot.params.id);
-      break;
-
-    case 'list/:id/productos':
-      this.lotesProductos(this.activateRoute.snapshot.params.id);
-      break;
-
-    case 'list':
-      this.list();
-      break;
+  ngOnInit(): void {
+    this.configFormGroup();
+    const currentUrl = this.activateRoute.snapshot.url.join('/');
+    if (currentUrl.includes('view')) {
+      this.mode = 1;
+    }
+    if (currentUrl.includes('create')) {
+      this.mode = 2;
+    } if (currentUrl.includes('update')) {
+      this.mode = 3;
+    }
+    if (this.activateRoute.snapshot.params.id) {
+      this.lote.id = this.activateRoute.snapshot.params.id;
+      this.getLote(this.lote.id);
+    }
   }
 
-}
-
-  list(){
-    this.service.list().subscribe((data) => {
-      this.lotes = data;
-      this.lotes.forEach((lote) => {
-        this.aplicarFuncionSiEsFecha(lote); // Aplica la función si la propiedad es un objeto Date
-      }
-      );
+  configFormGroup() {
+    this.theFormGroup = this.theFormBuilder.group({
+      cantidad_productos: [null],
+      peso_total: [null],
+      fecha_creacion: [null],
+      fecha_entrega: [null],
+      dir_lista_orden_id: [null],
+      ruta_id: [null]
     });
   }
 
-  lotesRutas(id:number){
-    this.service.lotesRutas(id).subscribe((data) => {
-      this.lotes = data;
+  get getTheFormGroup() {
+    return this.theFormGroup.controls;
+  }
+
+  atras(){
+    window.history.back();
+  }
+
+  getLote(id: number) {
+    this.service.view(id).subscribe(data => {
+      this.lote = data;
+      this.aplicarFuncionSiEsFecha(this.lote); // Aplica la función si la propiedad es un objeto Date
     });
   }
 
-  lotesDirlistaOrden(id:number){ 
-    this.service.lotesDirlistaOrden(id).subscribe((data) => {
-      console.log(data)
-      this.lotes = data;
-    });
+  create() {
+    if (this.theFormGroup.invalid) {
+      this.trySend = true
+      Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error")
+      return
+    }
+    this.service.create(this.lote).subscribe(data => {
+      Swal.fire("Creación Exitosa", "Se ha creado un nuevo registro", "success")
+      this.router.navigate(["lotes/list"])
+    })
   }
 
-  lotesProductos(id:number){
-    this.service.lotesProductos(id).subscribe((data) => {
-      this.lotes = data;
-    });
+  update() {
+    if (this.theFormGroup.invalid) {
+      this.trySend = true
+      Swal.fire("Error en el formulario", "Ingrese correctamente los datos solicitados", "error")
+      return
+    }
+    this.service.update(this.lote).subscribe(data => {
+      Swal.fire("Actualización Exitosa", "Se ha actualizado el registro", "success")
+      this.router.navigate(["lotes/list"])
+    })
   }
 
-  createLote(): void {
-    this.router.navigate(["lotes/create"])
-  }
-
-  viewLote(id: number): void {
-    this.router.navigate(["lotes/view/" + id])
-  }
-
-  updateLote(id: number): void {
-    this.router.navigate(["lotes/update/" + id])
-  }
-
-  deleteLote(id: number): void {
-    Swal.fire({
-      title: 'Eliminar lote',
-      text: '¿Está seguro que quiere eliminar este lote?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#232323',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar',
-      background: '#1c1c1c',
-      color: '#ffffff'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.service.delete(id).subscribe(data => {
-          Swal.fire({
-            title: 'Eliminado!',
-            text: 'El lote ha sido eliminado correctamente.',
-            icon: 'success',
-            confirmButtonColor: '#232323',
-            background: '#1c1c1c',
-            color: '#ffffff'
-          });
-          this.ngOnInit();
-        });
-      }
-    });
-    console.log('Eliminar lote con id:', id);
+  volverLote(): void {
+    this.router.navigate(["lotes/list"])
   }
 
   // Función que recibe un objeto y aplica una función si la propiedad es una fecha
@@ -136,4 +117,5 @@ export class ListComponent implements OnInit {
     const day = ('0' + d.getDate()).slice(-2);
     return `${day}-${month}-${year}`;
   }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Servicios } from 'src/app/models/servicios.model';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import Swal from 'sweetalert2';
@@ -12,12 +12,30 @@ import Swal from 'sweetalert2';
 export class ListComponent implements OnInit {
   servicios: Servicios[];
 
-  constructor(private service: ServiciosService, private router:Router) { 
+  constructor(private service: ServiciosService,
+     private router:Router,   
+      private activateRoute: ActivatedRoute  
+  ) { 
     this.servicios = [];
   }
 
-  ngOnInit(): void {
-    this.list();
+  ngOnInit(): void {  
+    switch (this.activateRoute.routeConfig?.path){
+  
+      case 'list/:id/hoteles':
+        this.serviciosHoteles(this.activateRoute.snapshot.params.id);
+        break;
+  
+      case 'list/:id/restaurantes':
+        this.serviciosRestaurantes(this.activateRoute.snapshot.params.id);
+        break;
+  
+    
+  
+      case 'list':
+        this.list();
+        break;
+    }
   }
 
   list() {
@@ -26,6 +44,20 @@ export class ListComponent implements OnInit {
       console.log(JSON.stringify(this.servicios));
     });
   }
+
+  serviciosHoteles(id:number){
+    this.service.serviciosHoteles(id).subscribe((data) => {
+      this.servicios = data;
+    });
+  }
+
+  serviciosRestaurantes(id:number){ 
+    this.service.serviciosRestaurantes(id).subscribe((data) => {
+      console.log(data)
+      this.servicios = data;
+    });
+  }
+
   deleteServicio(id: number): void {
     Swal.fire({
       title: 'Eliminar servicio',

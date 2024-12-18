@@ -86,9 +86,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            
-
                         </form>
 
                         <div class="row">
@@ -98,6 +95,8 @@
                                     class="btn btn-create btn-block">crear</button>
                                 <button *ngIf="mode==3" (click)="update()" type="button"
                                     class="btn btn-update btn-block">actualizar</button>
+                                <button *ngIf="mode==1" (click)="pay()" type="button"
+                                    class="btn btn-delete btn-block">PAGAR</button>
                             </div>
                         </div>
                     </div>
